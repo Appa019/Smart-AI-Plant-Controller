@@ -37,8 +37,9 @@
         <section class="landing-hero">
             <div class="landing-hero-text">
                 <h1 class="landing-hero-title">Hoya Pet</h1>
-                <p class="landing-hero-tagline">Seu pet virtual que cuida da sua planta com IoT e IA</p>
-                <button class="btn btn-primary landing-cta" id="landingCtaTop">Comece Agora</button>
+                <p class="landing-hero-tagline">Seu pet virtual cuida da planta enquanto voce nao esta.</p>
+                <p class="landing-hero-sub">Um ESP32 no vaso, um servidor na nuvem e um bichinho pixel art que te avisa quando a planta precisa de agua.</p>
+                <button class="btn btn-primary landing-cta" id="landingCtaTop">Entrar no App</button>
             </div>
             <div class="landing-hero-image">
                 <div class="pet-image-wrap">
@@ -53,9 +54,9 @@
         <!-- Divider: Grass -->
         <div class="landing-divider landing-divider-grass"></div>
 
-        <!-- Features -->
+        <!-- O que faz -->
         <section class="landing-features landing-reveal">
-            <h2 class="landing-section-title">O que o Hoya Pet faz?</h2>
+            <h2 class="landing-section-title">O que faz?</h2>
             <div class="landing-features-grid">
                 <div class="landing-feature-card landing-reveal">
                     <div class="landing-feature-icon">
@@ -66,8 +67,8 @@
                             </picture>
                         </div>
                     </div>
-                    <h3>Monitoramento em Tempo Real</h3>
-                    <p><span class="feat-bullet">&#128336;</span> Temperatura, umidade do ar e do solo atualizados a cada 10 segundos direto do sensor no ESP32.</p>
+                    <h3>Sensores no vaso</h3>
+                    <p>Temperatura, umidade do ar e do solo. Atualiza a cada 10s direto do ESP32.</p>
                 </div>
                 <div class="landing-feature-card landing-reveal">
                     <div class="landing-feature-icon">
@@ -78,8 +79,8 @@
                             </picture>
                         </div>
                     </div>
-                    <h3>Irrigacao Automatica</h3>
-                    <p><span class="feat-bullet">&#128167;</span> Bomba de agua controlada remotamente pelo app ou ativada automaticamente quando o solo seca.</p>
+                    <h3>Rega pelo celular</h3>
+                    <p>Aperta o botao no app e a bomba liga. Ou deixa no automatico e ele rega sozinho.</p>
                 </div>
                 <div class="landing-feature-card landing-reveal">
                     <div class="landing-feature-icon">
@@ -90,8 +91,8 @@
                             </picture>
                         </div>
                     </div>
-                    <h3>Pet Virtual com IA</h3>
-                    <p><span class="feat-bullet">&#129302;</span> Gato ou cachorro pixel art gerado pela OpenAI que reage ao estado da planta com frases unicas.</p>
+                    <h3>Pet que fala</h3>
+                    <p>Um gato ou cachorro pixel art que reage ao estado da planta. Muda de humor, fala do clima, reclama se voce esquece de regar.</p>
                 </div>
                 <div class="landing-feature-card landing-reveal">
                     <div class="landing-feature-icon">
@@ -102,8 +103,8 @@
                             </picture>
                         </div>
                     </div>
-                    <h3>Multi-Plantas</h3>
-                    <p><span class="feat-bullet">&#127807;</span> Gerencie ate 5 plantas com perfis individuais identificados por IA, cada uma com seu proprio pet.</p>
+                    <h3>Ate 5 plantas</h3>
+                    <p>Cada planta tem seu perfil (identificado por foto) e seu proprio pet cuidando dela.</p>
                 </div>
             </div>
         </section>
@@ -136,9 +137,20 @@
         <!-- Divider: Water -->
         <div class="landing-divider landing-divider-water"></div>
 
+        <!-- O prototipo real — destaque grande -->
+        <section class="landing-proto-section landing-reveal">
+            <h2 class="landing-section-title">O Hardware</h2>
+            <div class="landing-proto-hero">
+                <div class="pet-image-wrap">
+                    <img src="/screenshots/prototype_real.png" alt="Prototipo real" class="landing-proto-img" />
+                </div>
+            </div>
+            <p class="landing-proto-caption">ESP32-C3, sensor capacitivo no solo, bomba de agua 5V e modulo AHT10 pra temperatura e umidade. Tudo montado na mao.</p>
+        </section>
+
         <!-- Screenshots Carousel -->
         <section class="landing-screenshots landing-reveal">
-            <h2 class="landing-section-title">Veja em acao</h2>
+            <h2 class="landing-section-title">O App</h2>
             <div class="landing-carousel-frame">
                 <div class="landing-carousel-bezel">
                     <div class="landing-carousel-screen">
@@ -179,57 +191,59 @@
         <!-- Divider: Roots -->
         <div class="landing-divider landing-divider-roots"></div>
 
-        <!-- How it Works -->
+        <!-- Como funciona — simplificado -->
         <section class="landing-howto landing-reveal">
-            <h2 class="landing-section-title">Como Funciona</h2>
+            <h2 class="landing-section-title">Como funciona</h2>
             <div class="landing-steps">
                 <div class="landing-step landing-reveal">
                     <div class="landing-step-number">1</div>
                     <div class="landing-step-content">
-                        <h3>Conecte o Sensor</h3>
-                        <p>Insira o sensor capacitivo no solo e conecte o ESP32 ao Wi-Fi.</p>
+                        <h3>Espeta o sensor</h3>
+                        <p>Coloca o sensor capacitivo no solo, liga o ESP32 no Wi-Fi e ele ja comeca a mandar dados.</p>
                     </div>
                 </div>
                 <div class="landing-step-arrow">&#9660;</div>
                 <div class="landing-step landing-reveal">
                     <div class="landing-step-number">2</div>
                     <div class="landing-step-content">
-                        <h3>Monitore pelo App</h3>
-                        <p>Acesse o dashboard de qualquer lugar e veja os dados em tempo real.</p>
+                        <h3>Abre o app</h3>
+                        <p>Dashboard mostra tudo: temperatura, umidade, grafico historico. Funciona de qualquer lugar.</p>
                     </div>
                 </div>
                 <div class="landing-step-arrow">&#9660;</div>
                 <div class="landing-step landing-reveal">
                     <div class="landing-step-number">3</div>
                     <div class="landing-step-content">
-                        <h3>Irrigacao Inteligente</h3>
-                        <p>Regue manualmente pelo app ou deixe a IA decidir o melhor momento.</p>
+                        <h3>Tira foto da planta</h3>
+                        <p>A OpenAI Vision identifica a especie e monta o perfil com cuidados especificos.</p>
                     </div>
                 </div>
                 <div class="landing-step-arrow">&#9660;</div>
                 <div class="landing-step landing-reveal">
                     <div class="landing-step-number">4</div>
                     <div class="landing-step-content">
-                        <h3>Cuide do seu Pet</h3>
-                        <p>Seu pet virtual reage ao estado da planta e conversa com voce.</p>
+                        <h3>Ganha um pet</h3>
+                        <p>Pixel art gerado por IA que muda 2x por dia. Ele cuida da planta e conversa com voce.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Sobre o Projeto -->
+        <!-- Sobre — voz pessoal -->
         <section class="landing-sobre landing-reveal">
             <div class="landing-sobre-inner">
-                <h2 class="landing-section-title">Sobre o Projeto</h2>
+                <h2 class="landing-section-title">Por baixo do capo</h2>
                 <p class="landing-sobre-text">
-                    Hoya Pet e um projeto full-stack de IoT com IA, construido do zero como portfolio de engenharia.
-                    Um microcontrolador ESP32-C3 coleta dados de solo e clima em tempo real e os envia para um servidor
-                    FastAPI na nuvem, que usa a API da OpenAI para gerar um pet pixel art personalizado que reflete
-                    a saude da planta.
+                    O ESP32-C3 le o sensor capacitivo (ADC 12-bit) e o AHT10 via I2C, e envia tudo por HTTP POST
+                    pro servidor a cada 10 segundos. O firmware e C++ puro, com calibracao automatica do sensor.
                 </p>
                 <p class="landing-sobre-text">
-                    Do firmware em C++ ao backend Python, passando pela interface web em JS vanilla —
-                    tudo integrado, sem frameworks pesados.
+                    O backend e um unico server.py em FastAPI (~1800 linhas) que faz tudo: auth com JWT, ingestao dos dados
+                    do ESP32, historico em SQLite, irrigacao remota, e 3 chamadas diferentes pra OpenAI &mdash; Vision pra
+                    identificar planta, Responses API pra gerar o pixel art do pet, e Web Search pras frases do dia.
+                </p>
+                <p class="landing-sobre-text">
+                    Frontend e JS vanilla com Vite, sem React, sem framework. Roda num VPS Oracle Cloud com Nginx e Systemd.
                 </p>
             </div>
         </section>
@@ -239,35 +253,35 @@
 
         <!-- Tech Stack -->
         <section class="landing-tech landing-reveal">
-            <h2 class="landing-section-title">Tech Stack</h2>
+            <h2 class="landing-section-title">Stack</h2>
             <div class="landing-tech-badges">
                 <div class="landing-badge-wrap landing-reveal">
                     <span class="landing-badge">ESP32-C3</span>
-                    <span class="landing-badge-desc">firmware C++ / Arduino</span>
+                    <span class="landing-badge-desc">C++ / Arduino</span>
                 </div>
                 <div class="landing-badge-wrap landing-reveal">
                     <span class="landing-badge">FastAPI</span>
-                    <span class="landing-badge-desc">API REST + JWT</span>
+                    <span class="landing-badge-desc">REST + JWT</span>
                 </div>
                 <div class="landing-badge-wrap landing-reveal">
                     <span class="landing-badge">Python</span>
-                    <span class="landing-badge-desc">backend e logica IoT</span>
+                    <span class="landing-badge-desc">backend</span>
                 </div>
                 <div class="landing-badge-wrap landing-reveal">
                     <span class="landing-badge">OpenAI</span>
-                    <span class="landing-badge-desc">visao + geracao de imagem</span>
+                    <span class="landing-badge-desc">vision + imagem</span>
                 </div>
                 <div class="landing-badge-wrap landing-reveal">
                     <span class="landing-badge">SQLite</span>
-                    <span class="landing-badge-desc">historico de sensores</span>
+                    <span class="landing-badge-desc">historico</span>
                 </div>
                 <div class="landing-badge-wrap landing-reveal">
                     <span class="landing-badge">Vite</span>
-                    <span class="landing-badge-desc">frontend JS vanilla</span>
+                    <span class="landing-badge-desc">JS vanilla</span>
                 </div>
                 <div class="landing-badge-wrap landing-reveal">
                     <span class="landing-badge">Oracle Cloud</span>
-                    <span class="landing-badge-desc">VPS always-free</span>
+                    <span class="landing-badge-desc">VPS</span>
                 </div>
             </div>
             <div class="landing-arch">
@@ -282,15 +296,9 @@
                 </div>
                 <span class="landing-arch-arrow">&#9654;</span>
                 <div class="landing-arch-node">
-                    <span class="landing-arch-icon">&#9881;</span>
-                    <span>Dashboard</span>
+                    <span class="landing-arch-icon">&#128187;</span>
+                    <span>Browser</span>
                 </div>
-            </div>
-            <div class="landing-proto">
-                <div class="pet-image-wrap">
-                    <img src="/screenshots/prototype_real.png" alt="Prototipo real" class="landing-proto-img" />
-                </div>
-                <p class="landing-proto-caption">Prototipo real com ESP32-C3, sensor capacitivo e bomba de agua</p>
             </div>
             <div class="landing-github-card landing-reveal">
                 <div class="landing-github-card-inner">
@@ -298,22 +306,20 @@
                         <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                     </div>
                     <div class="landing-github-text">
-                        <h3>Codigo aberto no GitHub</h3>
-                        <p>Firmware ESP32, backend FastAPI, frontend Vite — tudo disponivel para estudo e contribuicao.</p>
+                        <h3>Codigo no GitHub</h3>
+                        <p>Firmware, backend e frontend. Tudo aberto.</p>
                     </div>
                     <a href="https://github.com/Appa019/Smart-AI-Plant-Controller" target="_blank" rel="noopener"
-                        class="btn btn-primary landing-github-btn">Ver Repositorio</a>
+                        class="btn btn-primary landing-github-btn">Ver Codigo</a>
                 </div>
             </div>
         </section>
 
         <!-- CTA Final -->
         <section class="landing-cta-final landing-reveal">
-            <div class="landing-cta-flourish" aria-hidden="true">&#10042;</div>
-            <h2>Pronto para comecar?</h2>
-            <p>Crie sua conta e comece a monitorar sua planta agora.</p>
+            <h2>Quer testar?</h2>
+            <p>Cria uma conta e ve o sistema rodando com dados reais do sensor.</p>
             <button class="btn btn-primary landing-cta" id="landingCtaBottom">Criar Conta</button>
-            <div class="landing-cta-flourish" aria-hidden="true">&#10042;</div>
         </section>
 
         <!-- Footer -->
@@ -322,12 +328,11 @@
                 <p class="landing-footer-copy">Hoya Pet &copy; 2026</p>
                 <div class="landing-footer-links">
                     <a href="https://github.com/Appa019/Smart-AI-Plant-Controller" target="_blank" rel="noopener"
-                        class="landing-footer-link">&#128279; GitHub</a>
-                    <span class="landing-footer-sep">|</span>
+                        class="landing-footer-link">GitHub</a>
+                    <span class="landing-footer-sep">/</span>
                     <a href="https://github.com/Appa019" target="_blank" rel="noopener"
-                        class="landing-footer-link">&#128100; @Appa019</a>
+                        class="landing-footer-link">@Appa019</a>
                 </div>
-                <p class="landing-footer-sub">Full-stack IoT + IA &mdash; feito com pixel art e muito cafe</p>
             </div>
         </footer>
     </div>
