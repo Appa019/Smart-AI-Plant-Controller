@@ -23,9 +23,7 @@ frontend/dist/
 data/
 
 # IDE & tools
-.claude/
 .playwright-mcp/
-CLAUDE.md
 
 # OS
 .DS_Store
