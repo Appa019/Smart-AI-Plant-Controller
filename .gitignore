@@ -1,0 +1,41 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+node_modules/
+
+# Build
+frontend/dist/
+
+# Environment & secrets
+.env
+*.key
+*.key.pub
+
+# Database
+*.db
+*.sqlite
+
+# Data (user data)
+data/
+
+# IDE & tools
+.claude/
+.playwright-mcp/
+CLAUDE.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dev images (root level artifacts)
+cachorro imagem.png
+gato imagem.png
+image.png
+image copy.png
+image copy 2.png
+Imagens_vaso/
+imagens/

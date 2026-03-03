@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Hoya Pet</title>
+    <meta name="description" content="Pet virtual que cuida da sua planta com monitoramento IoT em tempo real" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+</head>
+
+<body>
+
+    <!-- LANDING PAGE -->
+    <div id="pageLanding" class="page page-landing" style="display:none">
+        <!-- Nav -->
+        <nav class="landing-nav">
+            <div class="landing-nav-inner">
+                <div class="landing-nav-logo">
+                    <picture>
+                        <source srcset="/pixel_hoya_logo.webp" type="image/webp">
+                        <img src="/pixel_hoya_logo.png" alt="Hoya Pet"
+                            style="width: 32px; height: 32px; image-rendering: pixelated;" />
+                    </picture>
+                    <span class="landing-nav-title">Hoya Pet</span>
+                </div>
+                <button class="btn btn-primary landing-nav-btn" id="landingLoginBtn">Entrar</button>
+            </div>
+        </nav>
+
+        <!-- Hero -->
+        <section class="landing-hero">
+            <div class="landing-hero-text">
+                <h1 class="landing-hero-title">Hoya Pet</h1>
+                <p class="landing-hero-tagline">Seu pet virtual que cuida da sua planta com IoT e IA</p>
+                <button class="btn btn-primary landing-cta" id="landingCtaTop">Comece Agora</button>
+            </div>
+            <div class="landing-hero-image">
+                <div class="pet-image-wrap">
+                    <img src="/screenshots/hero_vase.png" alt="Smart Plant Pot" class="landing-hero-vase" />
+                </div>
+            </div>
+            <div class="landing-scroll-indicator" aria-hidden="true">
+                <span class="landing-scroll-arrow">&#9660;</span>
+            </div>
+        </section>
+
+        <!-- Divider: Grass -->
+        <div class="landing-divider landing-divider-grass"></div>
+
+        <!-- Features -->
+        <section class="landing-features landing-reveal">
+            <h2 class="landing-section-title">O que o Hoya Pet faz?</h2>
+            <div class="landing-features-grid">
+                <div class="landing-feature-card landing-reveal">
+                    <div class="landing-feature-icon">
+                        <div class="landing-feature-icon-bg">
+                            <picture>
+                                <source srcset="/farm_temp_icon.webp" type="image/webp">
+                                <img src="/farm_temp_icon.png" alt="Monitoramento" class="retro-metric-icon" />
+                            </picture>
+                        </div>
+                    </div>
+                    <h3>Monitoramento em Tempo Real</h3>
+                    <p><span class="feat-bullet">&#128336;</span> Temperatura, umidade do ar e do solo atualizados a cada 10 segundos direto do sensor no ESP32.</p>
+                </div>
+                <div class="landing-feature-card landing-reveal">
+                    <div class="landing-feature-icon">
+                        <div class="landing-feature-icon-bg">
+                            <picture>
+                                <source srcset="/farm_water_can_icon.webp" type="image/webp">
+                                <img src="/farm_water_can_icon.png" alt="Irrigacao" class="retro-metric-icon" />
+                            </picture>
+                        </div>
+                    </div>
+                    <h3>Irrigacao Automatica</h3>
+                    <p><span class="feat-bullet">&#128167;</span> Bomba de agua controlada remotamente pelo app ou ativada automaticamente quando o solo seca.</p>
+                </div>
+                <div class="landing-feature-card landing-reveal">
+                    <div class="landing-feature-icon">
+                        <div class="landing-feature-icon-bg">
+                            <picture>
+                                <source srcset="/pixel_cat.webp" type="image/webp">
+                                <img src="/pixel_cat.png" alt="Pet Virtual" style="width:48px;height:48px;image-rendering:pixelated;" />
+                            </picture>
+                        </div>
+                    </div>
+                    <h3>Pet Virtual com IA</h3>
+                    <p><span class="feat-bullet">&#129302;</span> Gato ou cachorro pixel art gerado pela OpenAI que reage ao estado da planta com frases unicas.</p>
+                </div>
+                <div class="landing-feature-card landing-reveal">
+                    <div class="landing-feature-icon">
+                        <div class="landing-feature-icon-bg">
+                            <picture>
+                                <source srcset="/cozy_plant_icon.webp" type="image/webp">
+                                <img src="/cozy_plant_icon.png" alt="Multi-Plantas" style="width:48px;height:48px;image-rendering:pixelated;" />
+                            </picture>
+                        </div>
+                    </div>
+                    <h3>Multi-Plantas</h3>
+                    <p><span class="feat-bullet">&#127807;</span> Gerencie ate 5 plantas com perfis individuais identificados por IA, cada uma com seu proprio pet.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Bar -->
+        <section class="landing-stats landing-reveal" aria-label="Numeros do projeto">
+            <div class="landing-stats-inner">
+                <div class="landing-stat-item">
+                    <span class="landing-stat-number" data-target="3">0</span>
+                    <span class="landing-stat-label">sensores</span>
+                </div>
+                <div class="landing-stat-divider" aria-hidden="true">&#9670;</div>
+                <div class="landing-stat-item">
+                    <span class="landing-stat-number" data-target="10">0</span>
+                    <span class="landing-stat-label">seg refresh</span>
+                </div>
+                <div class="landing-stat-divider" aria-hidden="true">&#9670;</div>
+                <div class="landing-stat-item">
+                    <span class="landing-stat-number" data-target="5">0</span>
+                    <span class="landing-stat-label">plantas</span>
+                </div>
+                <div class="landing-stat-divider" aria-hidden="true">&#9670;</div>
+                <div class="landing-stat-item">
+                    <span class="landing-stat-number" data-target="2">0</span>
+                    <span class="landing-stat-label">pets/dia</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider: Water -->
+        <div class="landing-divider landing-divider-water"></div>
+
+        <!-- Screenshots Carousel -->
+        <section class="landing-screenshots landing-reveal">
+            <h2 class="landing-section-title">Veja em acao</h2>
+            <div class="landing-carousel-frame">
+                <div class="landing-carousel-bezel">
+                    <div class="landing-carousel-screen">
+                        <div class="landing-carousel-scanlines"></div>
+                        <div class="landing-carousel-track" id="carouselTrack">
+                            <div class="landing-carousel-slide active">
+                                <img src="/screenshots/screen_dash.webp" alt="Dashboard"
+                                    onerror="this.parentElement.innerHTML='<div class=\'carousel-placeholder\'>Dashboard</div>'" />
+                            </div>
+                            <div class="landing-carousel-slide">
+                                <img src="/screenshots/screen_pet.webp" alt="Pet Virtual"
+                                    onerror="this.parentElement.innerHTML='<div class=\'carousel-placeholder\'>Pet Virtual</div>'" />
+                            </div>
+                            <div class="landing-carousel-slide">
+                                <img src="/screenshots/screen_metrics.webp" alt="Metricas"
+                                    onerror="this.parentElement.innerHTML='<div class=\'carousel-placeholder\'>Metricas</div>'" />
+                            </div>
+                            <div class="landing-carousel-slide">
+                                <img src="/screenshots/screen_setup.webp" alt="Setup"
+                                    onerror="this.parentElement.innerHTML='<div class=\'carousel-placeholder\'>Setup</div>'" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="landing-carousel-controls">
+                    <button class="landing-carousel-arrow" id="carouselPrev">&lt;</button>
+                    <div class="landing-carousel-dots" id="carouselDots">
+                        <span class="carousel-dot active"></span>
+                        <span class="carousel-dot"></span>
+                        <span class="carousel-dot"></span>
+                        <span class="carousel-dot"></span>
+                    </div>
+                    <button class="landing-carousel-arrow" id="carouselNext">&gt;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider: Roots -->
+        <div class="landing-divider landing-divider-roots"></div>
+
+        <!-- How it Works -->
+        <section class="landing-howto landing-reveal">
+            <h2 class="landing-section-title">Como Funciona</h2>
+            <div class="landing-steps">
+                <div class="landing-step landing-reveal">
+                    <div class="landing-step-number">1</div>
+                    <div class="landing-step-content">
+                        <h3>Conecte o Sensor</h3>
+                        <p>Insira o sensor capacitivo no solo e conecte o ESP32 ao Wi-Fi.</p>
+                    </div>
+                </div>
+                <div class="landing-step-arrow">&#9660;</div>
+                <div class="landing-step landing-reveal">
+                    <div class="landing-step-number">2</div>
+                    <div class="landing-step-content">
+                        <h3>Monitore pelo App</h3>
+                        <p>Acesse o dashboard de qualquer lugar e veja os dados em tempo real.</p>
+                    </div>
+                </div>
+                <div class="landing-step-arrow">&#9660;</div>
+                <div class="landing-step landing-reveal">
+                    <div class="landing-step-number">3</div>
+                    <div class="landing-step-content">
+                        <h3>Irrigacao Inteligente</h3>
+                        <p>Regue manualmente pelo app ou deixe a IA decidir o melhor momento.</p>
+                    </div>
+                </div>
+                <div class="landing-step-arrow">&#9660;</div>
+                <div class="landing-step landing-reveal">
+                    <div class="landing-step-number">4</div>
+                    <div class="landing-step-content">
+                        <h3>Cuide do seu Pet</h3>
+                        <p>Seu pet virtual reage ao estado da planta e conversa com voce.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sobre o Projeto -->
+        <section class="landing-sobre landing-reveal">
+            <div class="landing-sobre-inner">
+                <h2 class="landing-section-title">Sobre o Projeto</h2>
+                <p class="landing-sobre-text">
+                    Hoya Pet e um projeto full-stack de IoT com IA, construido do zero como portfolio de engenharia.
+                    Um microcontrolador ESP32-C3 coleta dados de solo e clima em tempo real e os envia para um servidor
+                    FastAPI na nuvem, que usa a API da OpenAI para gerar um pet pixel art personalizado que reflete
+                    a saude da planta.
+                </p>
+                <p class="landing-sobre-text">
+                    Do firmware em C++ ao backend Python, passando pela interface web em JS vanilla —
+                    tudo integrado, sem frameworks pesados.
+                </p>
+            </div>
+        </section>
+
+        <!-- Divider: Soil -->
+        <div class="landing-divider landing-divider-soil"></div>
+
+        <!-- Tech Stack -->
+        <section class="landing-tech landing-reveal">
+            <h2 class="landing-section-title">Tech Stack</h2>
+            <div class="landing-tech-badges">
+                <div class="landing-badge-wrap landing-reveal">
+                    <span class="landing-badge">ESP32-C3</span>
+                    <span class="landing-badge-desc">firmware C++ / Arduino</span>
+                </div>
+                <div class="landing-badge-wrap landing-reveal">
+                    <span class="landing-badge">FastAPI</span>
+                    <span class="landing-badge-desc">API REST + JWT</span>
+                </div>
+                <div class="landing-badge-wrap landing-reveal">
+                    <span class="landing-badge">Python</span>
+                    <span class="landing-badge-desc">backend e logica IoT</span>
+                </div>
+                <div class="landing-badge-wrap landing-reveal">
+                    <span class="landing-badge">OpenAI</span>
+                    <span class="landing-badge-desc">visao + geracao de imagem</span>
+                </div>
+                <div class="landing-badge-wrap landing-reveal">
+                    <span class="landing-badge">SQLite</span>
+                    <span class="landing-badge-desc">historico de sensores</span>
+                </div>
+                <div class="landing-badge-wrap landing-reveal">
+                    <span class="landing-badge">Vite</span>
+                    <span class="landing-badge-desc">frontend JS vanilla</span>
+                </div>
+                <div class="landing-badge-wrap landing-reveal">
+                    <span class="landing-badge">Oracle Cloud</span>
+                    <span class="landing-badge-desc">VPS always-free</span>
+                </div>
+            </div>
+            <div class="landing-arch">
+                <div class="landing-arch-node">
+                    <span class="landing-arch-icon">&#9881;</span>
+                    <span>ESP32</span>
+                </div>
+                <span class="landing-arch-arrow">&#9654;</span>
+                <div class="landing-arch-node">
+                    <span class="landing-arch-icon">&#9729;</span>
+                    <span>FastAPI</span>
+                </div>
+                <span class="landing-arch-arrow">&#9654;</span>
+                <div class="landing-arch-node">
+                    <span class="landing-arch-icon">&#9881;</span>
+                    <span>Dashboard</span>
+                </div>
+            </div>
+            <div class="landing-proto">
+                <div class="pet-image-wrap">
+                    <img src="/screenshots/prototype_real.png" alt="Prototipo real" class="landing-proto-img" />
+                </div>
+                <p class="landing-proto-caption">Prototipo real com ESP32-C3, sensor capacitivo e bomba de agua</p>
+            </div>
+            <div class="landing-github-card landing-reveal">
+                <div class="landing-github-card-inner">
+                    <div class="landing-github-icon">
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </div>
+                    <div class="landing-github-text">
+                        <h3>Codigo aberto no GitHub</h3>
+                        <p>Firmware ESP32, backend FastAPI, frontend Vite — tudo disponivel para estudo e contribuicao.</p>
+                    </div>
+                    <a href="https://github.com/Appa019/Smart-AI-Plant-Controller" target="_blank" rel="noopener"
+                        class="btn btn-primary landing-github-btn">Ver Repositorio</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Final -->
+        <section class="landing-cta-final landing-reveal">
+            <div class="landing-cta-flourish" aria-hidden="true">&#10042;</div>
+            <h2>Pronto para comecar?</h2>
+            <p>Crie sua conta e comece a monitorar sua planta agora.</p>
+            <button class="btn btn-primary landing-cta" id="landingCtaBottom">Criar Conta</button>
+            <div class="landing-cta-flourish" aria-hidden="true">&#10042;</div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="landing-footer">
+            <div class="landing-footer-inner">
+                <p class="landing-footer-copy">Hoya Pet &copy; 2026</p>
+                <div class="landing-footer-links">
+                    <a href="https://github.com/Appa019/Smart-AI-Plant-Controller" target="_blank" rel="noopener"
+                        class="landing-footer-link">&#128279; GitHub</a>
+                    <span class="landing-footer-sep">|</span>
+                    <a href="https://github.com/Appa019" target="_blank" rel="noopener"
+                        class="landing-footer-link">&#128100; @Appa019</a>
+                </div>
+                <p class="landing-footer-sub">Full-stack IoT + IA &mdash; feito com pixel art e muito cafe</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="pageLogin" class="page page-login">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-logo">
+                    <picture>
+                        <source srcset="/pixel_hoya_logo.webp" type="image/webp">
+                        <img src="/pixel_hoya_logo.png" alt="Hoya Pet"
+                            style="width: 96px; height: 96px; image-rendering: pixelated;" />
+                    </picture>
+                </div>
+                <h1 class="login-title">Hoya Pet</h1>
+                <p class="login-subtitle">Monitoramento inteligente</p>
+                <form id="loginForm" autocomplete="on">
+                    <div class="input-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" placeholder="seu@email.com" autocomplete="email" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="loginPass">Senha</label>
+                        <input type="password" id="loginPass" placeholder="Sua senha" autocomplete="current-password"
+                            required />
+                        <button type="button" class="toggle-password" id="toggleLoginPass" aria-label="Mostrar senha">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full" id="loginBtn">
+                        <span class="btn-text">Entrar</span>
+                        <span class="btn-loader" style="display:none"></span>
+                    </button>
+                    <p class="login-error" id="loginError"></p>
+                    <p class="auth-link">
+                        <a href="#" id="showSignupLink">Criar nova conta</a> |
+                        <a href="#" id="showForgotLink">Esqueci minha senha</a>
+                    </p>
+                    <p class="auth-link"><a href="#" class="back-to-landing">&larr; Voltar para o inicio</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGNUP -->
+    <div id="pageSignup" class="page page-login" style="display:none">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-logo">
+                    <picture>
+                        <source srcset="/cozy_plant_icon.webp" type="image/webp">
+                        <img src="/cozy_plant_icon.png" alt="Happy Potted Plant"
+                            style="width: 64px; height: 64px; image-rendering: pixelated; margin-bottom: 1rem;" />
+                    </picture>
+                </div>
+                <h1 class="login-title">Criar Conta</h1>
+                <p class="login-subtitle">Junte-se ao Hoya Pet</p>
+                <form id="signupForm" autocomplete="on">
+                    <div class="input-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" placeholder="seu@email.com" autocomplete="email"
+                            required />
+                    </div>
+                    <div class="input-group">
+                        <label for="signupPass">Senha</label>
+                        <input type="password" id="signupPass" placeholder="No mínimo 6 caracteres"
+                            autocomplete="new-password" required minlength="6" />
+                        <button type="button" class="toggle-password" id="toggleSignupPass" aria-label="Mostrar senha">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full" id="signupBtn">
+                        <span class="btn-text">Cadastrar</span>
+                        <span class="btn-loader" style="display:none"></span>
+                    </button>
+                    <p class="login-error" id="signupError"></p>
+                    <p class="auth-link"><a href="#" id="showLoginLink">Já tenho uma conta</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- VERIFY CODE -->
+    <div id="pageVerify" class="page page-login" style="display:none">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-logo">
+                    <picture>
+                        <source srcset="/cozy_plant_icon.webp" type="image/webp">
+                        <img src="/cozy_plant_icon.png" alt="Happy Potted Plant"
+                            style="width: 64px; height: 64px; image-rendering: pixelated; margin-bottom: 1rem;" />
+                    </picture>
+                </div>
+                <h1 class="login-title">Verificação</h1>
+                <p class="login-subtitle" id="verifySubtitle">Enviamos um código para seu e-mail.</p>
+                <form id="verifyForm" autocomplete="off">
+                    <div class="input-group">
+                        <label for="verifyCode">Código de 6 dígitos</label>
+                        <input type="text" id="verifyCode" placeholder="000000" required pattern="[0-9]*" maxlength="6"
+                            style="text-align: center; font-size: 1.5em; letter-spacing: 8px; font-variant-numeric: tabular-nums;" />
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full" id="verifyBtn">
+                        <span class="btn-text">Confirmar</span>
+                        <span class="btn-loader" style="display:none"></span>
+                    </button>
+                    <p class="login-error" id="verifyError"></p>
+                    <p class="auth-link"><a href="#" id="showLoginFromVerifyLink">Voltar para o Login</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORGOT PASSWORD REQUEST -->
+    <div id="pageForgot" class="page page-login" style="display:none">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-logo">
+                    <picture>
+                        <source srcset="/cozy_plant_icon.webp" type="image/webp">
+                        <img src="/cozy_plant_icon.png" alt="Happy Potted Plant"
+                            style="width: 64px; height: 64px; image-rendering: pixelated; margin-bottom: 1rem;" />
+                    </picture>
+                </div>
+                <h1 class="login-title">Recuperar Senha</h1>
+                <p class="login-subtitle">Enviaremos um código para o seu e-mail.</p>
+                <form id="forgotForm" autocomplete="on">
+                    <div class="input-group">
+                        <label for="forgotEmail">Email</label>
+                        <input type="email" id="forgotEmail" placeholder="seu@email.com" autocomplete="email"
+                            required />
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full" id="forgotBtn">
+                        <span class="btn-text">Solicitar Código</span>
+                        <span class="btn-loader" style="display:none"></span>
+                    </button>
+                    <p class="login-error" id="forgotError"></p>
+                    <p class="auth-link"><a href="#" id="showLoginFromForgotLink">Voltar para o Login</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORGOT PASSWORD RESET -->
+    <div id="pageReset" class="page page-login" style="display:none">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-logo">
+                    <picture>
+                        <source srcset="/cozy_plant_icon.webp" type="image/webp">
+                        <img src="/cozy_plant_icon.png" alt="Happy Potted Plant"
+                            style="width: 64px; height: 64px; image-rendering: pixelated; margin-bottom: 1rem;" />
+                    </picture>
+                </div>
+                <h1 class="login-title">Nova Senha</h1>
+                <p class="login-subtitle" id="resetSubtitle">Verifique seu e-mail.</p>
+                <form id="resetForm" autocomplete="off">
+                    <div class="input-group">
+                        <label for="resetCode">Código de 6 dígitos</label>
+                        <input type="text" id="resetCode" placeholder="000000" required pattern="[0-9]*" maxlength="6"
+                            style="text-align: center; font-size: 1.5em; letter-spacing: 8px; font-variant-numeric: tabular-nums;" />
+                    </div>
+                    <div class="input-group">
+                        <label for="resetPass">Nova Senha</label>
+                        <input type="password" id="resetPass" placeholder="No mínimo 6 caracteres"
+                            autocomplete="new-password" required minlength="6" />
+                        <button type="button" class="toggle-password" id="toggleResetPass" aria-label="Mostrar senha">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full" id="resetBtn">
+                        <span class="btn-text">Redefinir Senha</span>
+                        <span class="btn-loader" style="display:none"></span>
+                    </button>
+                    <p class="login-error" id="resetError"></p>
+                    <p class="auth-link"><a href="#" id="showLoginFromResetLink">Pular e voltar para o Login</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SETUP -->
+    <div id="pageSetup" class="page page-setup" style="display:none">
+        <div class="setup-container">
+            <!-- Step 1 -->
+            <div id="setupStep1" class="setup-step">
+                <div class="setup-header" style="position: relative;">
+                    <button class="btn btn-secondary" id="cancelSetup1Btn"
+                        style="display:none; position:absolute; top: -10px; left: 0; padding: 4px 10px; font-size: 0.75rem;">&larr;
+                        Voltar</button>
+                    <span class="setup-step-badge">Passo 1 de 2</span>
+                    <h2>Fotografe sua planta</h2>
+                    <p>A inteligencia artificial vai identificar a especie e os cuidados ideais.</p>
+                </div>
+                <div class="upload-buttons" id="uploadArea">
+                    <button type="button" class="upload-option" id="btnCamera">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1d1d1f" stroke-width="1.5">
+                            <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" />
+                            <circle cx="12" cy="13" r="4" />
+                        </svg>
+                        <span>Tirar foto</span>
+                    </button>
+                    <button type="button" class="upload-option" id="btnGallery">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1d1d1f" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="3" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <path d="M21 15l-5-5L5 21" />
+                        </svg>
+                        <span>Escolher da galeria</span>
+                    </button>
+                    <input type="file" id="plantCameraInput" accept="image/*" capture="environment"
+                        style="display:none" />
+                    <input type="file" id="plantGalleryInput" accept="image/*" style="display:none" />
+                </div>
+                <div id="uploadPreview" class="upload-preview" style="display:none">
+                    <img id="previewImg" alt="Sua planta" />
+                    <button class="btn btn-secondary" id="changePhotoBtn">Trocar foto</button>
+                </div>
+                <button class="btn btn-primary btn-full" id="analyzePlantBtn" style="display:none">
+                    <span class="btn-text">Analisar com IA</span>
+                    <span class="btn-loader" style="display:none"></span>
+                </button>
+                <div id="plantResult" class="plant-result" style="display:none">
+                    <div class="plant-result-card">
+                        <h3 id="plantNamePopular"></h3>
+                        <p class="plant-scientific" id="plantNameScientific"></p>
+                        <p class="plant-description" id="plantDescription"></p>
+                        <div class="plant-ranges">
+                            <div class="range-item"><span class="range-label">Temperatura</span><span
+                                    class="range-value" id="rangeTemp"></span></div>
+                            <div class="range-item"><span class="range-label">Umidade do ar</span><span
+                                    class="range-value" id="rangeHum"></span></div>
+                            <div class="range-item"><span class="range-label">Umidade do solo</span><span
+                                    class="range-value" id="rangeSoil"></span></div>
+                        </div>
+                        <p class="plant-care" id="plantCare"></p>
+                    </div>
+                    <button class="btn btn-primary btn-full" id="goToStep2Btn">Escolher Pet</button>
+                </div>
+            </div>
+            <!-- Step 2 -->
+            <div id="setupStep2" class="setup-step" style="display:none">
+                <div class="setup-header" style="position: relative;">
+                    <button class="btn btn-secondary" id="cancelSetup2Btn"
+                        style="display:none; position:absolute; top: -10px; left: 0; padding: 4px 10px; font-size: 0.75rem;">&larr;
+                        Voltar</button>
+                    <span class="setup-step-badge">Passo 2 de 2</span>
+                    <h2>Escolha seu pet</h2>
+                    <p>Ele vai cuidar da sua planta e reagir ao estado dela.</p>
+                </div>
+                <div class="pet-selector">
+                    <div class="pet-option" data-type="cat" id="petOptCat">
+                        <picture>
+                            <source srcset="/pixel_cat.webp" type="image/webp">
+                            <img src="/pixel_cat.png" alt="Gato" style="width:64px;height:64px;object-fit:contain;image-rendering:pixelated;" />
+                        </picture>
+                        <span>Gato</span>
+                    </div>
+                    <div class="pet-option" data-type="dog" id="petOptDog">
+                        <picture>
+                            <source srcset="/pixel_dog.webp" type="image/webp">
+                            <img src="/pixel_dog.png" alt="Cachorro" style="width:64px;height:64px;object-fit:contain;image-rendering:pixelated;" />
+                        </picture>
+                        <span>Cachorro</span>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="petNameInput">Nome do pet</label>
+                    <input type="text" id="petNameInput" placeholder="Ex: Mimi, Rex, Luna..." maxlength="20" />
+                </div>
+                <button class="btn btn-primary btn-full" id="finishSetupBtn" disabled>
+                    <span class="btn-text">Comecar</span>
+                    <span class="btn-loader" style="display:none"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="pageDash" class="page page-dash" style="display:none">
+        <header class="dash-header">
+            <div class="dash-header-left">
+                <picture>
+                    <source srcset="/pixel_hoya_logo.webp" type="image/webp">
+                    <img src="/pixel_hoya_logo.png" alt="Hoya Pet" class="dash-header-logo" />
+                </picture>
+                <div class="dash-header-text">
+                    <span class="dash-title" id="dashTitle">Hoya Pet</span>
+                    <div class="dash-status">
+                        <span class="status-dot" id="statusDot"></span>
+                        <span class="status-text" id="statusText">Conectando...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="dash-header-right">
+                <button class="btn-icon" id="menuBtn" title="Menu">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+                        stroke-width="1.8">
+                        <line x1="3" y1="5" x2="17" y2="5" />
+                        <line x1="3" y1="10" x2="17" y2="10" />
+                        <line x1="3" y1="15" x2="17" y2="15" />
+                    </svg>
+                </button>
+            </div>
+        </header>
+        <div class="dash-menu" id="dashMenu" style="display:none">
+            <button class="menu-item" id="menuUpdatePhoto">Atualizar foto da planta</button>
+            <button class="menu-item" id="menuEditPet">Alterar Pet</button>
+            <button class="menu-item" id="menuGeneratePet">Gerar pet agora</button>
+            <button class="menu-item" id="menuCalibrateSoil">Calibrar sensor de solo</button>
+            <button class="menu-item menu-item-danger" id="menuDeletePlant">Remover planta atual</button>
+            <hr class="menu-divider" />
+            <button class="menu-item menu-item-danger" id="menuLogout">Sair</button>
+            <input type="file" id="updatePhotoInput" accept="image/*" capture="environment" style="display:none" />
+        </div>
+
+        <!-- Modal Alterar Pet -->
+        <div id="editPetModal" class="dashboard-modal"
+            style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999; justify-content:center; align-items:center;">
+            <div class="modal-content"
+                style="background:#fff; width:90%; max-width:400px; padding:1.5rem; border:4px solid #2c2c2c; box-shadow:8px 8px 0px #2c2c2c; position:relative; text-align:left;">
+                <button id="closeEditPetModal"
+                    style="position:absolute; top:8px; right:8px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#2c2c2c; font-weight:bold;">&times;</button>
+                <h3 style="margin:0 0 1rem; font-size:1.1rem; font-weight:700;">Alterar Pet</h3>
+                <div class="pet-selector" id="editPetSelector">
+                    <div class="pet-option" data-type="cat" id="editPetOptCat">
+                        <picture>
+                            <source srcset="/pixel_cat.webp" type="image/webp">
+                            <img src="/pixel_cat.png" alt="Gato" style="width:64px;height:64px;object-fit:contain;image-rendering:pixelated;" />
+                        </picture>
+                        <span>Gato</span>
+                    </div>
+                    <div class="pet-option" data-type="dog" id="editPetOptDog">
+                        <picture>
+                            <source srcset="/pixel_dog.webp" type="image/webp">
+                            <img src="/pixel_dog.png" alt="Cachorro" style="width:64px;height:64px;object-fit:contain;image-rendering:pixelated;" />
+                        </picture>
+                        <span>Cachorro</span>
+                    </div>
+                </div>
+                <div class="input-group" style="margin-top:0.75rem;">
+                    <label for="editPetNameInput">Nome do pet</label>
+                    <input type="text" id="editPetNameInput" placeholder="Ex: Mimi, Rex, Luna..." maxlength="20" />
+                </div>
+                <button class="btn btn-primary btn-full" id="saveEditPetBtn" style="margin-top:0.75rem;">
+                    <span class="btn-text">Salvar</span>
+                    <span class="btn-loader" style="display:none"></span>
+                </button>
+            </div>
+        </div>
+
+        <section class="pet-hero">
+            <div class="pet-image-wrap" id="petImageWrap">
+                <div class="pet-placeholder" id="petPlaceholder">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="3" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <path d="M21 15l-5-5L5 21" />
+                    </svg>
+                    <p>Gerando seu pet...</p>
+                    <p class="pet-placeholder-sub">A primeira imagem sera criada em breve</p>
+                </div>
+                <img id="petImage" class="pet-image" alt="Seu pet" style="display:none" />
+            </div>
+            <div class="pet-name-bar">
+                <img src="/arcade_heart_icon.png" alt="<3"
+                    style="width:24px; height:24px; image-rendering:pixelated; vertical-align:middle;" />
+                <span class="pet-name" id="petNameDisplay"></span>
+            </div>
+            <div class="pet-speech" id="petSpeech" style="display:none">
+              <span id="petSpeechText"></span>
+            </div>
+        </section>
+
+        <!-- Banner setup (visivel apenas se sem planta configurada) -->
+        <div class="setup-banner" id="setupBanner" style="display:none">
+            <span>Nenhuma planta configurada.</span>
+            <button class="setup-banner-btn" id="setupBannerBtn">Configurar agora</button>
+        </div>
+
+        <!-- Pet Carousel -->
+        <section class="pet-carousel-strip" id="petCarouselStrip">
+            <div class="pet-carousel-scroll" id="petCarouselScroll">
+                <!-- Dynamically populated by JS: shows plant image + pet name for each slot -->
+            </div>
+        </section>
+
+        <button class="plant-info-bar btn" id="plantInfoBar" title="Ver Informações da Planta"
+            style="border-radius: 0; text-transform: none; background: #fff; box-shadow: 2px 2px 0px #2c2c2c;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span id="dashPlantName" style="font-weight: 700;"></span>
+            <span class="plant-info-sep" style="margin: 0 4px;">·</span>
+            <span class="plant-info-scientific" id="dashPlantScientific"
+                style="font-style: italic; font-size: 0.8em;"></span>
+        </button>
+
+        <section class="recommendation-card" id="recommendation">Aguardando dados...</section>
+
+        <div class="water-btn-row">
+            <button class="water-btn" id="waterBtn">
+                <picture>
+                    <source srcset="/farm_water_can_icon.webp" type="image/webp">
+                    <img src="/farm_water_can_icon.png" alt="" class="water-btn-icon" />
+                </picture>
+                <span class="btn-text">REGAR AGORA</span>
+                <span class="btn-loader" style="display:none">Regando...</span>
+            </button>
+        </div>
+        <div class="last-pump-row" id="lastPumpRow" style="display:none;">
+            <span class="last-pump-label">💧 Última rega:</span>
+            <span id="lastPumpTime">—</span>
+        </div>
+
+        <section class="dash-metrics">
+            <div class="dash-metric-card">
+                <div class="dash-metric-header">
+                    <picture>
+                        <source srcset="/farm_temp_icon.webp" type="image/webp">
+                        <img src="/farm_temp_icon.png" alt="Temperatura" class="retro-metric-icon" />
+                    </picture>
+                    <span class="dash-metric-label">Temp</span>
+                    <span class="dash-metric-trend" id="trendTemp"></span>
+                </div>
+                <span class="dash-metric-value" id="valTemp">--</span>
+                <span class="dash-metric-range" id="idealTemp"></span>
+                <span class="dash-metric-minmax" id="minmaxTemp"></span>
+            </div>
+            <div class="dash-metric-card">
+                <div class="dash-metric-header">
+                    <picture>
+                        <source srcset="/farm_humid_icon.webp" type="image/webp">
+                        <img src="/farm_humid_icon.png" alt="Umidade Ar" class="retro-metric-icon" />
+                    </picture>
+                    <span class="dash-metric-label">Ar</span>
+                    <span class="dash-metric-trend" id="trendHum"></span>
+                </div>
+                <span class="dash-metric-value" id="valHum">--</span>
+                <span class="dash-metric-range" id="idealHum"></span>
+                <span class="dash-metric-minmax" id="minmaxHum"></span>
+            </div>
+            <div class="dash-metric-card">
+                <div class="dash-metric-header">
+                    <picture>
+                        <source srcset="/farm_soil_icon.webp" type="image/webp">
+                        <img src="/farm_soil_icon.png" alt="Umidade Solo" class="retro-metric-icon" />
+                    </picture>
+                    <span class="dash-metric-label">Solo</span>
+                    <span class="dash-metric-trend" id="trendSoil"></span>
+                </div>
+                <span class="dash-metric-value" id="valSoil">--</span>
+                <span class="dash-metric-range" id="idealSoil"></span>
+                <span class="dash-metric-minmax" id="minmaxSoil"></span>
+            </div>
+            <div class="dash-metric-card dash-metric-health">
+                <div class="dash-metric-header">
+                    <span class="dash-metric-label">Saude da Planta</span>
+                    <span class="dash-metric-range" id="healthLabel"></span>
+                </div>
+                <span class="dash-metric-value" id="valHealth">--</span>
+                <div class="health-bar-mini">
+                    <div class="health-bar-fill" id="healthBar"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="dash-charts">
+            <div class="charts-header">
+                <span class="charts-title">Historico</span>
+                <div class="charts-period">
+                    <div class="period-select-wrap">
+                        <select id="chartPeriodSelect" class="period-select">
+                            <option value="1">1h</option>
+                            <option value="3">3h</option>
+                            <option value="6" selected>6h</option>
+                            <option value="24">1 dia</option>
+                            <option value="72">3 dias</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-card">
+                <span class="chart-label">Temperatura (C)</span>
+                <canvas id="chartTemp" height="100"></canvas>
+            </div>
+            <div class="chart-card">
+                <span class="chart-label">Umidade do Ar (%)</span>
+                <canvas id="chartHum" height="100"></canvas>
+            </div>
+            <div class="chart-card">
+                <span class="chart-label">Umidade do Solo (%) — suavizado</span>
+                <canvas id="chartSoil" height="100"></canvas>
+            </div>
+        </section>
+
+        <div class="dash-footer">
+            <span id="lastUpdate"></span>
+        </div>
+
+        <!-- Modal de Informacao da Planta -->
+        <div id="plantModal" class="dashboard-modal"
+            style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999; justify-content:center; align-items:center;">
+            <div class="modal-content"
+                style="background:#fff; width:90%; max-width:400px; padding:1.5rem; border:4px solid #2c2c2c; box-shadow:8px 8px 0px #2c2c2c; position:relative; text-align:left;">
+                <button id="closePlantModal"
+                    style="position:absolute; top:8px; right:8px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#2c2c2c; font-weight:bold;">&times;</button>
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:0.5rem;">
+                    <picture>
+                        <source srcset="/pixel_hoya_logo.webp" type="image/webp">
+                        <img src="/pixel_hoya_logo.png" style="width:36px; height:36px; image-rendering:pixelated;">
+                    </picture>
+                    <h3 id="modalPlantName" style="margin:0; font-size:1.2rem; font-weight:700;">Nome Popular</h3>
+                </div>
+                <p id="modalPlantScientific"
+                    style="font-style:italic; font-size:0.85rem; color:#555; margin-bottom:1rem;">Nome Cientifico</p>
+                <p id="modalPlantDesc" style="font-size:0.8rem; line-height:1.5; margin-bottom:1rem;"></p>
+
+                <div
+                    style="background:#faf3e0; border:2px solid #2c2c2c; padding:0.5rem; border-radius:4px; margin-bottom:1rem;">
+                    <h4 style="font-size:0.8rem; margin-bottom:0.5rem; text-transform:uppercase;">Condições Ideais</h4>
+                    <ul style="list-style:none; font-size:0.75rem; line-height:1.6; padding:0;">
+                        <li><strong>Temp:</strong> <span id="modalIdealTemp"></span></li>
+                        <li><strong>Ar:</strong> <span id="modalIdealHum"></span></li>
+                        <li><strong>Solo:</strong> <span id="modalIdealSoil"></span></li>
+                    </ul>
+                </div>
+                <p id="modalPlantCare" style="font-size:0.75rem; line-height:1.5; color:#4a7c59; font-weight:600;"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Calibrar Solo -->
+    <div id="calibrateModal" class="dashboard-modal"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999; justify-content:center; align-items:center;">
+        <div class="modal-content"
+            style="background:#fff; width:90%; max-width:400px; padding:1.5rem; border:4px solid #2c2c2c; box-shadow:8px 8px 0px #2c2c2c; position:relative; text-align:left;">
+            <button id="closeCalibrateModal"
+                style="position:absolute; top:8px; right:8px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#2c2c2c; font-weight:bold;">&times;</button>
+            <h3 style="margin:0 0 0.75rem; font-size:1.1rem; font-weight:700;">Calibrar Sensor de Solo</h3>
+
+            <!-- Passo 0: idle -->
+            <div id="calStep0">
+                <p style="font-size:0.85rem; line-height:1.5; margin-bottom:1rem; color:#444;">
+                    A calibracao determina o valor de <strong>100% umidade</strong> para o seu solo especifico.
+                    Ao iniciar, a bomba ligara por <strong>5 segundos</strong> para encharcar o solo.
+                    Depois aguardamos 30s para o sensor estabilizar e salvamos o valor.
+                </p>
+                <div id="calCurrentInfo" style="font-size:0.8rem; color:#888; margin-bottom:1rem;"></div>
+                <button class="water-btn" id="calStartBtn" style="background:#0d6e40;">
+                    <span class="btn-text">Iniciar Calibracao</span>
+                    <span class="btn-loader" style="display:none">Regando 5s...</span>
+                </button>
+            </div>
+
+            <!-- Passo 1: countdown -->
+            <div id="calStep1" style="display:none; text-align:center;">
+                <div style="font-size:0.9rem; color:#444; margin-bottom:0.75rem;">
+                    Solo encharcado. Aguardando absorcao...
+                </div>
+                <div id="calCountdown"
+                    style="font-size:2.5rem; font-weight:700; color:#1a73e8; font-family:monospace; margin-bottom:0.75rem;">
+                    30</div>
+                <div style="font-size:0.75rem; color:#888;">Nao mova o vaso. O sensor esta estabilizando.</div>
+                <div class="cal-progress-bar-wrap">
+                    <div class="cal-progress-bar" id="calProgressBar"></div>
+                </div>
+            </div>
+
+            <!-- Passo 2: salvar -->
+            <div id="calStep2" style="display:none;">
+                <p style="font-size:0.85rem; color:#444; margin-bottom:1rem;">
+                    Solo estabilizado. Clique para salvar a leitura atual como referencia de <strong>solo encharcado
+                        (100%)</strong>.
+                </p>
+                <button class="water-btn" id="calSaveBtn">
+                    <span class="btn-text">Salvar Calibracao</span>
+                    <span class="btn-loader" style="display:none">Salvando...</span>
+                </button>
+            </div>
+
+            <!-- Resultado -->
+            <div id="calResult"
+                style="display:none; margin-top:1rem; padding:0.75rem; background:#f0faf2; border:2px solid #1b7a3a; font-size:0.85rem; color:#1b7a3a;">
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

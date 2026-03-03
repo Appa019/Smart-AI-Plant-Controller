@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+requests
+pydantic
+openai
+python-jose[cryptography]
+python-multipart
+python-dotenv
+apscheduler
