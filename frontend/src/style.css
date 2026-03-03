@@ -3043,14 +3043,6 @@ body {
         padding: 3rem 2rem 2.5rem;
     }
 
-    .landing-highlights-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .landing-highlights {
-        padding: 3rem 2rem 2.5rem;
-    }
-
     /* Scroll indicator so visivel no mobile no modo coluna */
     .landing-scroll-indicator {
         display: none;
