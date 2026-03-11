@@ -7,9 +7,10 @@
     <title>Hoya Pet</title>
     <meta name="description" content="Pet virtual que cuida da sua planta com monitoramento IoT em tempo real" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Nunito:wght@400;600;700;800&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/src/style.css" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#faf4e1" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 </head>
@@ -18,320 +19,249 @@
 
     <!-- LANDING PAGE -->
     <div id="pageLanding" class="page page-landing" style="display:none">
+
         <!-- Nav -->
-        <nav class="landing-nav">
-            <div class="landing-nav-inner">
-                <div class="landing-nav-logo">
+        <nav class="lp-nav" id="lpNav">
+            <div class="lp-nav-inner">
+                <div class="lp-nav-logo">
                     <picture>
                         <source srcset="/pixel_hoya_logo.webp" type="image/webp">
-                        <img src="/pixel_hoya_logo.png" alt="Hoya Pet"
-                            style="width: 32px; height: 32px; image-rendering: pixelated;" />
+                        <img src="/pixel_hoya_logo.png" alt="Hoya Pet" width="28" height="28"
+                            style="image-rendering: pixelated;" />
                     </picture>
-                    <span class="landing-nav-title">Hoya Pet</span>
+                    <span class="lp-nav-title">Hoya Pet</span>
                 </div>
-                <button class="btn btn-primary landing-nav-btn" id="landingLoginBtn">Entrar</button>
+                <button class="lp-nav-btn" id="landingLoginBtn">Entrar</button>
             </div>
         </nav>
 
         <!-- Hero -->
-        <section class="landing-hero">
-            <div class="landing-hero-text">
-                <h1 class="landing-hero-title">Hoya Pet</h1>
-                <p class="landing-hero-tagline">Seu pet virtual cuida da planta enquanto voce nao esta.</p>
-                <p class="landing-hero-sub">Um ESP32 no vaso, um servidor na nuvem e um bichinho pixel art que te avisa quando a planta precisa de agua.</p>
-                <button class="btn btn-primary landing-cta" id="landingCtaTop">Entrar no App</button>
-            </div>
-            <div class="landing-hero-image">
-                <div class="pet-image-wrap">
-                    <img src="/screenshots/hero_vase.png" alt="Smart Plant Pot" class="landing-hero-vase" />
+        <section class="lp-hero">
+            <div class="lp-hero-text">
+                <span class="lp-label">Monitoramento IoT + Pixel Art Pet</span>
+                <h1 class="lp-hero-title">Seu pet virtual cuida da planta.</h1>
+                <p class="lp-hero-body">Um ESP32 no vaso, um servidor na nuvem e um bichinho pixel art que te avisa quando a planta precisa de agua.</p>
+                <div class="lp-hero-actions">
+                    <button class="lp-btn lp-btn--primary" id="landingCtaTop">Entrar no App</button>
+                    <a href="https://github.com/Appa019/Smart-AI-Plant-Controller" target="_blank" rel="noopener"
+                        class="lp-btn lp-btn--ghost">Ver no GitHub &rarr;</a>
                 </div>
             </div>
-            <div class="landing-scroll-indicator" aria-hidden="true">
-                <span class="landing-scroll-arrow">&#9660;</span>
+            <div class="lp-hero-visual">
+                <img src="/screenshots/hero_vase.png" alt="Smart Plant Pot" class="lp-hero-vase" />
+                <div class="lp-hero-badge">
+                    <picture>
+                        <source srcset="/pixel_cat.webp" type="image/webp">
+                        <img src="/pixel_cat.png" alt="" width="28" height="28" style="image-rendering:pixelated;" />
+                    </picture>
+                    <span>Seu pet ta de olho</span>
+                </div>
             </div>
         </section>
 
-        <!-- Divider: Grass -->
-        <div class="landing-divider landing-divider-grass"></div>
-
-        <!-- O que faz -->
-        <section class="landing-features landing-reveal">
-            <h2 class="landing-section-title">O que faz?</h2>
-            <div class="landing-features-grid">
-                <div class="landing-feature-card landing-reveal">
-                    <div class="landing-feature-icon">
-                        <div class="landing-feature-icon-bg">
-                            <picture>
-                                <source srcset="/farm_temp_icon.webp" type="image/webp">
-                                <img src="/farm_temp_icon.png" alt="Monitoramento" class="retro-metric-icon" />
-                            </picture>
-                        </div>
-                    </div>
+        <!-- Features -->
+        <section class="lp-features lp-reveal">
+            <div class="lp-section-header">
+                <span class="lp-label">Recursos</span>
+                <h2 class="lp-section-title">Monitoramento inteligente, com personalidade.</h2>
+            </div>
+            <div class="lp-features-grid">
+                <div class="lp-feat-card lp-feat-card--tall lp-reveal">
+                    <picture>
+                        <source srcset="/farm_temp_icon.webp" type="image/webp">
+                        <img src="/farm_temp_icon.png" alt="" class="lp-feat-icon" />
+                    </picture>
                     <h3>Sensores no vaso</h3>
-                    <p>Temperatura, umidade do ar e do solo. Atualiza a cada 10s direto do ESP32.</p>
+                    <p>Temperatura, umidade do ar e do solo. Atualiza a cada 10 segundos direto do ESP32.</p>
+                    <span class="lp-feat-stat">3 sensores &middot; 10s refresh</span>
                 </div>
-                <div class="landing-feature-card landing-reveal">
-                    <div class="landing-feature-icon">
-                        <div class="landing-feature-icon-bg">
-                            <picture>
-                                <source srcset="/farm_water_can_icon.webp" type="image/webp">
-                                <img src="/farm_water_can_icon.png" alt="Irrigacao" class="retro-metric-icon" />
-                            </picture>
-                        </div>
-                    </div>
+                <div class="lp-feat-card lp-reveal">
+                    <picture>
+                        <source srcset="/farm_water_can_icon.webp" type="image/webp">
+                        <img src="/farm_water_can_icon.png" alt="" class="lp-feat-icon" />
+                    </picture>
                     <h3>Rega pelo celular</h3>
                     <p>Aperta o botao no app e a bomba liga. Ou deixa no automatico e ele rega sozinho.</p>
                 </div>
-                <div class="landing-feature-card landing-reveal">
-                    <div class="landing-feature-icon">
-                        <div class="landing-feature-icon-bg">
-                            <picture>
-                                <source srcset="/pixel_cat.webp" type="image/webp">
-                                <img src="/pixel_cat.png" alt="Pet Virtual" style="width:48px;height:48px;image-rendering:pixelated;" />
-                            </picture>
-                        </div>
-                    </div>
+                <div class="lp-feat-card lp-reveal">
+                    <picture>
+                        <source srcset="/pixel_cat.webp" type="image/webp">
+                        <img src="/pixel_cat.png" alt="" class="lp-feat-icon" style="image-rendering:pixelated;" />
+                    </picture>
                     <h3>Pet que fala</h3>
-                    <p>Um gato ou cachorro pixel art que reage ao estado da planta. Muda de humor, fala do clima, reclama se voce esquece de regar.</p>
+                    <p>Gato ou cachorro pixel art que reage ao estado da planta. Muda de humor e conversa com voce.</p>
+                    <span class="lp-feat-stat">2 updates/dia</span>
                 </div>
-                <div class="landing-feature-card landing-reveal">
-                    <div class="landing-feature-icon">
-                        <div class="landing-feature-icon-bg">
-                            <picture>
-                                <source srcset="/cozy_plant_icon.webp" type="image/webp">
-                                <img src="/cozy_plant_icon.png" alt="Multi-Plantas" style="width:48px;height:48px;image-rendering:pixelated;" />
-                            </picture>
-                        </div>
-                    </div>
+                <div class="lp-feat-card lp-feat-card--wide lp-reveal">
+                    <picture>
+                        <source srcset="/cozy_plant_icon.webp" type="image/webp">
+                        <img src="/cozy_plant_icon.png" alt="" class="lp-feat-icon" style="image-rendering:pixelated;" />
+                    </picture>
                     <h3>Ate 5 plantas</h3>
-                    <p>Cada planta tem seu perfil (identificado por foto) e seu proprio pet cuidando dela.</p>
+                    <p>Cada planta tem seu perfil (identificado por foto com IA) e seu proprio pet cuidando dela.</p>
+                    <span class="lp-feat-stat">5 perfis simultaneos</span>
                 </div>
             </div>
         </section>
 
-        <!-- Stats Bar -->
-        <section class="landing-stats landing-reveal" aria-label="Numeros do projeto">
-            <div class="landing-stats-inner">
-                <div class="landing-stat-item">
-                    <span class="landing-stat-number" data-target="3">0</span>
-                    <span class="landing-stat-label">sensores</span>
-                </div>
-                <div class="landing-stat-divider" aria-hidden="true">&#9670;</div>
-                <div class="landing-stat-item">
-                    <span class="landing-stat-number" data-target="10">0</span>
-                    <span class="landing-stat-label">seg refresh</span>
-                </div>
-                <div class="landing-stat-divider" aria-hidden="true">&#9670;</div>
-                <div class="landing-stat-item">
-                    <span class="landing-stat-number" data-target="5">0</span>
-                    <span class="landing-stat-label">plantas</span>
-                </div>
-                <div class="landing-stat-divider" aria-hidden="true">&#9670;</div>
-                <div class="landing-stat-item">
-                    <span class="landing-stat-number" data-target="2">0</span>
-                    <span class="landing-stat-label">pets/dia</span>
-                </div>
+        <!-- Hardware / Prototype -->
+        <section class="lp-proto lp-reveal">
+            <div class="lp-proto-image">
+                <img src="/screenshots/prototype_real.png" alt="Prototipo real montado a mao" class="lp-proto-img" />
+            </div>
+            <div class="lp-proto-text">
+                <span class="lp-label">O Hardware</span>
+                <h2 class="lp-section-title">Montado na mao.</h2>
+                <p>ESP32-C3, sensor capacitivo no solo, bomba de agua 5V e modulo AHT10 pra temperatura e umidade. Firmware em C++ puro com calibracao automatica.</p>
             </div>
         </section>
 
-        <!-- Divider: Water -->
-        <div class="landing-divider landing-divider-water"></div>
-
-        <!-- O prototipo real — destaque grande -->
-        <section class="landing-proto-section landing-reveal">
-            <h2 class="landing-section-title">O Hardware</h2>
-            <div class="landing-proto-hero">
-                <div class="pet-image-wrap">
-                    <img src="/screenshots/prototype_real.png" alt="Prototipo real" class="landing-proto-img" />
-                </div>
+        <!-- App Screenshots -->
+        <section class="lp-app lp-reveal">
+            <div class="lp-app-text">
+                <span class="lp-label">O App</span>
+                <h2 class="lp-section-title">Tudo no navegador.</h2>
+                <p>Dashboard com dados em tempo real, historico, controle de irrigacao e o pet que reage a tudo. Funciona de qualquer lugar.</p>
             </div>
-            <p class="landing-proto-caption">ESP32-C3, sensor capacitivo no solo, bomba de agua 5V e modulo AHT10 pra temperatura e umidade. Tudo montado na mao.</p>
-        </section>
-
-        <!-- Screenshots Carousel -->
-        <section class="landing-screenshots landing-reveal">
-            <h2 class="landing-section-title">O App</h2>
-            <div class="landing-carousel-frame">
-                <div class="landing-carousel-bezel">
-                    <div class="landing-carousel-screen">
-                        <div class="landing-carousel-scanlines"></div>
-                        <div class="landing-carousel-track" id="carouselTrack">
-                            <div class="landing-carousel-slide active">
-                                <img src="/screenshots/screen_dash.webp" alt="Dashboard"
-                                    onerror="this.parentElement.innerHTML='<div class=\'carousel-placeholder\'>Dashboard</div>'" />
-                            </div>
-                            <div class="landing-carousel-slide">
-                                <img src="/screenshots/screen_pet.webp" alt="Pet Virtual"
-                                    onerror="this.parentElement.innerHTML='<div class=\'carousel-placeholder\'>Pet Virtual</div>'" />
-                            </div>
-                            <div class="landing-carousel-slide">
-                                <img src="/screenshots/screen_metrics.webp" alt="Metricas"
-                                    onerror="this.parentElement.innerHTML='<div class=\'carousel-placeholder\'>Metricas</div>'" />
-                            </div>
-                            <div class="landing-carousel-slide">
-                                <img src="/screenshots/screen_setup.webp" alt="Setup"
-                                    onerror="this.parentElement.innerHTML='<div class=\'carousel-placeholder\'>Setup</div>'" />
-                            </div>
+            <div class="lp-app-phone">
+                <div class="lp-phone-frame">
+                    <div class="lp-phone-screen" id="carouselTrack">
+                        <div class="lp-phone-slide active">
+                            <img src="/screenshots/screen_dash.webp" alt="Dashboard"
+                                onerror="this.parentElement.innerHTML='<div class=\'lp-slide-placeholder\'>Dashboard</div>'" />
+                        </div>
+                        <div class="lp-phone-slide">
+                            <img src="/screenshots/screen_pet.webp" alt="Pet Virtual"
+                                onerror="this.parentElement.innerHTML='<div class=\'lp-slide-placeholder\'>Pet Virtual</div>'" />
+                        </div>
+                        <div class="lp-phone-slide">
+                            <img src="/screenshots/screen_metrics.webp" alt="Metricas"
+                                onerror="this.parentElement.innerHTML='<div class=\'lp-slide-placeholder\'>Metricas</div>'" />
+                        </div>
+                        <div class="lp-phone-slide">
+                            <img src="/screenshots/screen_setup.webp" alt="Setup"
+                                onerror="this.parentElement.innerHTML='<div class=\'lp-slide-placeholder\'>Setup</div>'" />
                         </div>
                     </div>
                 </div>
-                <div class="landing-carousel-controls">
-                    <button class="landing-carousel-arrow" id="carouselPrev">&lt;</button>
-                    <div class="landing-carousel-dots" id="carouselDots">
-                        <span class="carousel-dot active"></span>
-                        <span class="carousel-dot"></span>
-                        <span class="carousel-dot"></span>
-                        <span class="carousel-dot"></span>
-                    </div>
-                    <button class="landing-carousel-arrow" id="carouselNext">&gt;</button>
+                <div class="lp-phone-dots" id="carouselDots">
+                    <span class="lp-dot active"></span>
+                    <span class="lp-dot"></span>
+                    <span class="lp-dot"></span>
+                    <span class="lp-dot"></span>
                 </div>
             </div>
         </section>
 
-        <!-- Divider: Roots -->
-        <div class="landing-divider landing-divider-roots"></div>
-
-        <!-- Como funciona — simplificado -->
-        <section class="landing-howto landing-reveal">
-            <h2 class="landing-section-title">Como funciona</h2>
-            <div class="landing-steps">
-                <div class="landing-step landing-reveal">
-                    <div class="landing-step-number">1</div>
-                    <div class="landing-step-content">
-                        <h3>Espeta o sensor</h3>
-                        <p>Coloca o sensor capacitivo no solo, liga o ESP32 no Wi-Fi e ele ja comeca a mandar dados.</p>
-                    </div>
+        <!-- How it works -->
+        <section class="lp-howto lp-reveal">
+            <div class="lp-section-header lp-section-header--center">
+                <span class="lp-label">Passo a passo</span>
+                <h2 class="lp-section-title">Como funciona</h2>
+            </div>
+            <div class="lp-howto-grid">
+                <div class="lp-howto-step lp-reveal">
+                    <span class="lp-howto-num">01</span>
+                    <h3>Espeta o sensor</h3>
+                    <p>Coloca o sensor capacitivo no solo, liga o ESP32 no Wi-Fi e ele ja comeca a mandar dados.</p>
                 </div>
-                <div class="landing-step-arrow">&#9660;</div>
-                <div class="landing-step landing-reveal">
-                    <div class="landing-step-number">2</div>
-                    <div class="landing-step-content">
-                        <h3>Abre o app</h3>
-                        <p>Dashboard mostra tudo: temperatura, umidade, grafico historico. Funciona de qualquer lugar.</p>
-                    </div>
+                <div class="lp-howto-step lp-reveal">
+                    <span class="lp-howto-num">02</span>
+                    <h3>Abre o app</h3>
+                    <p>Dashboard mostra tudo: temperatura, umidade, grafico historico. Funciona de qualquer lugar.</p>
                 </div>
-                <div class="landing-step-arrow">&#9660;</div>
-                <div class="landing-step landing-reveal">
-                    <div class="landing-step-number">3</div>
-                    <div class="landing-step-content">
-                        <h3>Tira foto da planta</h3>
-                        <p>A OpenAI Vision identifica a especie e monta o perfil com cuidados especificos.</p>
-                    </div>
+                <div class="lp-howto-step lp-reveal">
+                    <span class="lp-howto-num">03</span>
+                    <h3>Tira foto da planta</h3>
+                    <p>A OpenAI Vision identifica a especie e monta o perfil com cuidados especificos.</p>
                 </div>
-                <div class="landing-step-arrow">&#9660;</div>
-                <div class="landing-step landing-reveal">
-                    <div class="landing-step-number">4</div>
-                    <div class="landing-step-content">
-                        <h3>Ganha um pet</h3>
-                        <p>Pixel art gerado por IA que muda 2x por dia. Ele cuida da planta e conversa com voce.</p>
-                    </div>
+                <div class="lp-howto-step lp-reveal">
+                    <span class="lp-howto-num">04</span>
+                    <h3>Ganha um pet</h3>
+                    <p>Pixel art gerado por IA que muda 2x por dia. Ele cuida da planta e conversa com voce.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Sobre — voz pessoal -->
-        <section class="landing-sobre landing-reveal">
-            <div class="landing-sobre-inner">
-                <h2 class="landing-section-title">Por baixo do capo</h2>
-                <p class="landing-sobre-text">
-                    O ESP32-C3 le o sensor capacitivo (ADC 12-bit) e o AHT10 via I2C, e envia tudo por HTTP POST
-                    pro servidor a cada 10 segundos. O firmware e C++ puro, com calibracao automatica do sensor.
-                </p>
-                <p class="landing-sobre-text">
-                    O backend e um unico server.py em FastAPI (~1800 linhas) que faz tudo: auth com JWT, ingestao dos dados
-                    do ESP32, historico em SQLite, irrigacao remota, e 3 chamadas diferentes pra OpenAI &mdash; Vision pra
-                    identificar planta, Responses API pra gerar o pixel art do pet, e Web Search pras frases do dia.
-                </p>
-                <p class="landing-sobre-text">
-                    Frontend e JS vanilla com Vite, sem React, sem framework. Roda num VPS Oracle Cloud com Nginx e Systemd.
-                </p>
+        <!-- Tech + About (unified) -->
+        <section class="lp-tech lp-reveal">
+            <div class="lp-tech-text">
+                <span class="lp-label">Por baixo do capo</span>
+                <h2 class="lp-section-title">Stack completa, do firmware ao browser.</h2>
+                <p>O ESP32-C3 le o sensor capacitivo (ADC 12-bit) e o AHT10 via I2C, e envia tudo por HTTP POST pro servidor a cada 10 segundos. O firmware e C++ puro, com calibracao automatica.</p>
+                <p>O backend e um unico server.py em FastAPI (~1800 linhas) que faz tudo: auth com JWT, ingestao dos dados do ESP32, historico em SQLite, irrigacao remota, e 3 chamadas diferentes pra OpenAI &mdash; Vision pra identificar planta, Responses API pra gerar o pixel art, e Web Search pras frases do dia.</p>
+                <p>Frontend e JS vanilla com Vite, sem framework. Roda num VPS Oracle Cloud com Nginx e Systemd.</p>
+                <a href="https://github.com/Appa019/Smart-AI-Plant-Controller" target="_blank" rel="noopener"
+                    class="lp-tech-link">Ver codigo no GitHub &rarr;</a>
             </div>
-        </section>
-
-        <!-- Divider: Soil -->
-        <div class="landing-divider landing-divider-soil"></div>
-
-        <!-- Tech Stack -->
-        <section class="landing-tech landing-reveal">
-            <h2 class="landing-section-title">Stack</h2>
-            <div class="landing-tech-badges">
-                <div class="landing-badge-wrap landing-reveal">
-                    <span class="landing-badge">ESP32-C3</span>
-                    <span class="landing-badge-desc">C++ / Arduino</span>
-                </div>
-                <div class="landing-badge-wrap landing-reveal">
-                    <span class="landing-badge">FastAPI</span>
-                    <span class="landing-badge-desc">REST + JWT</span>
-                </div>
-                <div class="landing-badge-wrap landing-reveal">
-                    <span class="landing-badge">Python</span>
-                    <span class="landing-badge-desc">backend</span>
-                </div>
-                <div class="landing-badge-wrap landing-reveal">
-                    <span class="landing-badge">OpenAI</span>
-                    <span class="landing-badge-desc">vision + imagem</span>
-                </div>
-                <div class="landing-badge-wrap landing-reveal">
-                    <span class="landing-badge">SQLite</span>
-                    <span class="landing-badge-desc">historico</span>
-                </div>
-                <div class="landing-badge-wrap landing-reveal">
-                    <span class="landing-badge">Vite</span>
-                    <span class="landing-badge-desc">JS vanilla</span>
-                </div>
-                <div class="landing-badge-wrap landing-reveal">
-                    <span class="landing-badge">Oracle Cloud</span>
-                    <span class="landing-badge-desc">VPS</span>
-                </div>
-            </div>
-            <div class="landing-arch">
-                <div class="landing-arch-node">
-                    <span class="landing-arch-icon">&#9881;</span>
-                    <span>ESP32</span>
-                </div>
-                <span class="landing-arch-arrow">&#9654;</span>
-                <div class="landing-arch-node">
-                    <span class="landing-arch-icon">&#9729;</span>
-                    <span>FastAPI</span>
-                </div>
-                <span class="landing-arch-arrow">&#9654;</span>
-                <div class="landing-arch-node">
-                    <span class="landing-arch-icon">&#128187;</span>
-                    <span>Browser</span>
-                </div>
-            </div>
-            <div class="landing-github-card landing-reveal">
-                <div class="landing-github-card-inner">
-                    <div class="landing-github-icon">
-                        <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <div class="lp-tech-pills">
+                <div class="lp-pill-group">
+                    <span class="lp-pill-label">Hardware</span>
+                    <div class="lp-pill-row">
+                        <span class="lp-pill lp-reveal">ESP32-C3</span>
+                        <span class="lp-pill lp-reveal">C++ / Arduino</span>
+                        <span class="lp-pill lp-reveal">AHT10</span>
                     </div>
-                    <div class="landing-github-text">
-                        <h3>Codigo no GitHub</h3>
-                        <p>Firmware, backend e frontend. Tudo aberto.</p>
+                </div>
+                <div class="lp-pill-group">
+                    <span class="lp-pill-label">Backend</span>
+                    <div class="lp-pill-row">
+                        <span class="lp-pill lp-reveal">Python</span>
+                        <span class="lp-pill lp-reveal">FastAPI</span>
+                        <span class="lp-pill lp-reveal">SQLite</span>
                     </div>
-                    <a href="https://github.com/Appa019/Smart-AI-Plant-Controller" target="_blank" rel="noopener"
-                        class="btn btn-primary landing-github-btn">Ver Codigo</a>
+                </div>
+                <div class="lp-pill-group">
+                    <span class="lp-pill-label">AI</span>
+                    <div class="lp-pill-row">
+                        <span class="lp-pill lp-reveal">OpenAI Vision</span>
+                        <span class="lp-pill lp-reveal">DALL-E</span>
+                    </div>
+                </div>
+                <div class="lp-pill-group">
+                    <span class="lp-pill-label">Frontend</span>
+                    <div class="lp-pill-row">
+                        <span class="lp-pill lp-reveal">Vite</span>
+                        <span class="lp-pill lp-reveal">JS Vanilla</span>
+                    </div>
+                </div>
+                <div class="lp-pill-group">
+                    <span class="lp-pill-label">Infra</span>
+                    <div class="lp-pill-row">
+                        <span class="lp-pill lp-reveal">Oracle Cloud</span>
+                        <span class="lp-pill lp-reveal">Nginx</span>
+                        <span class="lp-pill lp-reveal">Systemd</span>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- CTA Final -->
-        <section class="landing-cta-final landing-reveal">
-            <h2>Quer testar?</h2>
-            <p>Cria uma conta e ve o sistema rodando com dados reais do sensor.</p>
-            <button class="btn btn-primary landing-cta" id="landingCtaBottom">Criar Conta</button>
+        <section class="lp-cta-final lp-reveal">
+            <div class="lp-cta-final-inner">
+                <div class="lp-cta-final-text">
+                    <h2 class="lp-section-title">Quer testar?</h2>
+                    <p>Cria uma conta e ve o sistema rodando com dados reais do sensor.</p>
+                </div>
+                <button class="lp-btn lp-btn--primary" id="landingCtaBottom">Criar Conta</button>
+            </div>
         </section>
 
         <!-- Footer -->
-        <footer class="landing-footer">
-            <div class="landing-footer-inner">
-                <p class="landing-footer-copy">Hoya Pet &copy; 2026</p>
-                <div class="landing-footer-links">
-                    <a href="https://github.com/Appa019/Smart-AI-Plant-Controller" target="_blank" rel="noopener"
-                        class="landing-footer-link">GitHub</a>
-                    <span class="landing-footer-sep">/</span>
-                    <a href="https://github.com/Appa019" target="_blank" rel="noopener"
-                        class="landing-footer-link">@Appa019</a>
+        <footer class="lp-footer">
+            <div class="lp-footer-inner">
+                <div class="lp-footer-left">
+                    <picture>
+                        <source srcset="/pixel_hoya_logo.webp" type="image/webp">
+                        <img src="/pixel_hoya_logo.png" alt="" width="20" height="20"
+                            style="image-rendering:pixelated;" />
+                    </picture>
+                    <span>Hoya Pet &copy; 2026</span>
+                </div>
+                <div class="lp-footer-links">
+                    <a href="https://github.com/Appa019/Smart-AI-Plant-Controller" target="_blank"
+                        rel="noopener">GitHub</a>
+                    <a href="https://github.com/Appa019" target="_blank" rel="noopener">@Appa019</a>
                 </div>
             </div>
         </footer>
@@ -615,6 +545,33 @@
                     <label for="petNameInput">Nome do pet</label>
                     <input type="text" id="petNameInput" placeholder="Ex: Mimi, Rex, Luna..." maxlength="20" />
                 </div>
+                <div class="input-group">
+                    <label>Foto do seu pet <span class="optional-tag">(opcional)</span></label>
+                    <p class="setup-hint">Envie uma foto do seu gato ou cachorro real e a IA gera o pixel art baseado nele.</p>
+                    <div class="upload-buttons" id="petUploadArea">
+                        <button type="button" class="upload-option" id="btnPetCamera">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1d1d1f" stroke-width="1.5">
+                                <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" />
+                                <circle cx="12" cy="13" r="4" />
+                            </svg>
+                            <span>Tirar foto</span>
+                        </button>
+                        <button type="button" class="upload-option" id="btnPetGallery">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1d1d1f" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="3" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <path d="M21 15l-5-5L5 21" />
+                            </svg>
+                            <span>Escolher da galeria</span>
+                        </button>
+                        <input type="file" id="petCameraInput" accept="image/*" capture="environment" style="display:none" />
+                        <input type="file" id="petGalleryInput" accept="image/*" style="display:none" />
+                    </div>
+                    <div id="petUploadPreview" class="upload-preview" style="display:none">
+                        <img id="petPreviewImg" alt="Seu pet" />
+                        <button class="btn btn-secondary" id="changePetPhotoBtn">Trocar foto</button>
+                    </div>
+                </div>
                 <button class="btn btn-primary btn-full" id="finishSetupBtn" disabled>
                     <span class="btn-text">Comecar</span>
                     <span class="btn-loader" style="display:none"></span>
@@ -653,12 +610,14 @@
         <div class="dash-menu" id="dashMenu" style="display:none">
             <button class="menu-item" id="menuUpdatePhoto">Atualizar foto da planta</button>
             <button class="menu-item" id="menuEditPet">Alterar Pet</button>
+            <button class="menu-item" id="menuUpdatePetPhoto">Atualizar foto do pet</button>
             <button class="menu-item" id="menuGeneratePet">Gerar pet agora</button>
             <button class="menu-item" id="menuCalibrateSoil">Calibrar sensor de solo</button>
             <button class="menu-item menu-item-danger" id="menuDeletePlant">Remover planta atual</button>
             <hr class="menu-divider" />
             <button class="menu-item menu-item-danger" id="menuLogout">Sair</button>
             <input type="file" id="updatePhotoInput" accept="image/*" capture="environment" style="display:none" />
+            <input type="file" id="updatePetPhotoInput" accept="image/*" style="display:none" />
         </div>
 
         <!-- Modal Alterar Pet -->

@@ -354,6 +354,7 @@ function initAuth() {
 // ==================== SETUP ====================
 let selectedFile = null;
 let selectedPetType = '';
+let selectedPetFile = null;
 
 function initSetup() {
     const cameraInput = $('plantCameraInput');
@@ -444,6 +445,29 @@ function initSetup() {
         $('finishSetupBtn').disabled = !(selectedPetType && name.length >= 1);
     }
 
+    // Pet photo upload handlers
+    $('btnPetCamera').addEventListener('click', () => $('petCameraInput').click());
+    $('btnPetGallery').addEventListener('click', () => $('petGalleryInput').click());
+
+    function handlePetFile(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        selectedPetFile = file;
+        $('petPreviewImg').src = URL.createObjectURL(file);
+        $('petUploadArea').style.display = 'none';
+        $('petUploadPreview').style.display = 'block';
+    }
+    $('petCameraInput').addEventListener('change', handlePetFile);
+    $('petGalleryInput').addEventListener('change', handlePetFile);
+
+    $('changePetPhotoBtn').addEventListener('click', () => {
+        selectedPetFile = null;
+        $('petUploadArea').style.display = 'grid';
+        $('petUploadPreview').style.display = 'none';
+        $('petCameraInput').value = '';
+        $('petGalleryInput').value = '';
+    });
+
     // Finish setup
     $('finishSetupBtn').addEventListener('click', async () => {
         const btn = $('finishSetupBtn');
@@ -451,6 +475,14 @@ function initSetup() {
         showLoading('Configurando pet...');
 
         try {
+            // Upload pet reference photo if provided
+            if (selectedPetFile) {
+                showLoading('Enviando foto do pet...');
+                const petFormData = new FormData();
+                petFormData.append('file', selectedPetFile);
+                await api('POST', '/api/pet/upload-photo', petFormData, true);
+            }
+
             await api('POST', '/api/pet/configure', {
                 name: $('petNameInput').value.trim(),
                 type: selectedPetType,
@@ -524,8 +556,13 @@ function resetSetupForm() {
     $('plantGalleryInput').value = '';
     selectedFile = null;
     selectedPetType = '';
+    selectedPetFile = null;
     $('petNameInput').value = '';
     $('finishSetupBtn').disabled = true;
+    $('petUploadArea').style.display = 'grid';
+    $('petUploadPreview').style.display = 'none';
+    $('petCameraInput').value = '';
+    $('petGalleryInput').value = '';
     document.querySelectorAll('#setupStep2 .pet-option').forEach(o => o.classList.remove('selected'));
 }
 
@@ -1138,6 +1175,31 @@ function initMenu() {
             updatePhotoInput.value = '';
         }
     });
+
+    // Update pet reference photo from dashboard
+    const updatePetPhotoInput = $('updatePetPhotoInput');
+    $('menuUpdatePetPhoto').addEventListener('click', () => {
+        menu.style.display = 'none';
+        updatePetPhotoInput.click();
+    });
+    updatePetPhotoInput.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        showLoading('Enviando foto do pet...');
+        try {
+            const petFormData = new FormData();
+            petFormData.append('file', file);
+            await api('POST', '/api/pet/upload-photo', petFormData, true);
+            showLoading('Regenerando pet com nova foto...');
+            await api('POST', '/api/pet/generate');
+            await refreshPet();
+        } catch (e) {
+            alert('Erro: ' + e.message);
+        } finally {
+            hideLoading();
+            updatePetPhotoInput.value = '';
+        }
+    });
 }
 
 // ==================== CALIBRACAO DE SOLO ====================
@@ -1290,24 +1352,13 @@ function checkWaterCooldown() {
 // ==================== LANDING PAGE ====================
 let landingObserverInit = false;
 
-// Anima contadores da stats bar quando revelados
-function animateStatCounters(sectionEl) {
-    const numbers = sectionEl.querySelectorAll('.landing-stat-number');
-    numbers.forEach(el => {
-        const target = parseInt(el.dataset.target, 10);
-        if (isNaN(target)) return;
-        let current = 0;
-        const steps = 12; // passos discretos para manter feel pixel art
-        const delay = 60;  // ms entre cada passo
-        const increment = Math.ceil(target / steps);
-        const tick = () => {
-            current = Math.min(current + increment, target);
-            el.textContent = current;
-            if (current < target) setTimeout(tick, delay);
-        };
-        el.textContent = '0';
-        setTimeout(tick, 80);
-    });
+function initNavScroll() {
+    const nav = document.getElementById('lpNav');
+    const landing = document.getElementById('pageLanding');
+    if (!nav || !landing) return;
+    landing.addEventListener('scroll', () => {
+        nav.classList.toggle('lp-nav--scrolled', landing.scrollTop > 40);
+    }, { passive: true });
 }
 
 function initLanding() {
@@ -1318,24 +1369,7 @@ function initLanding() {
         el.addEventListener('click', e => { e.preventDefault(); showPage('landing'); })
     );
     initCarousel();
-    initStatsObserver();
-}
-
-// Observador separado para a stats bar — dispara o counter quando visivel
-function initStatsObserver() {
-    const statsSection = document.querySelector('.landing-stats');
-    if (!statsSection) return;
-    let triggered = false;
-    const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (e.isIntersecting && !triggered) {
-                triggered = true;
-                animateStatCounters(e.target);
-                obs.unobserve(e.target);
-            }
-        });
-    }, { threshold: 0.4 });
-    obs.observe(statsSection);
+    initNavScroll();
 }
 
 function initLandingObserver() {
@@ -1346,15 +1380,15 @@ function initLandingObserver() {
         entries.forEach(e => {
             if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); }
         });
-    }, { root, threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.landing-reveal').forEach(el => obs.observe(el));
+    }, { root, threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+    document.querySelectorAll('.lp-reveal').forEach(el => obs.observe(el));
 }
 
 function initCarousel() {
-    const track = $('carouselTrack'), prev = $('carouselPrev'), next = $('carouselNext');
-    if (!track || !prev) return;
-    const slides = track.querySelectorAll('.landing-carousel-slide');
-    const dots = $('carouselDots')?.querySelectorAll('.carousel-dot') || [];
+    const track = $('carouselTrack');
+    if (!track) return;
+    const slides = track.querySelectorAll('.lp-phone-slide');
+    const dots = $('carouselDots')?.querySelectorAll('.lp-dot') || [];
     let cur = 0;
     function go(i) {
         if (i < 0) i = slides.length - 1;
@@ -1365,10 +1399,8 @@ function initCarousel() {
         dots[i]?.classList.add('active');
         cur = i;
     }
-    prev.addEventListener('click', () => go(cur - 1));
-    next.addEventListener('click', () => go(cur + 1));
     dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
-    setInterval(() => { if ($('pageLanding').style.display !== 'none') go(cur + 1); }, 5000);
+    setInterval(() => { if ($('pageLanding').style.display !== 'none') go(cur + 1); }, 6000);
 }
 
 // ==================== INIT ====================
