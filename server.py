@@ -7,8 +7,9 @@ Hoya Pet App — FastAPI backend.
 - Sensor data API (current, history, stats)
 - ESP32 ingest endpoint (unchanged, no auth required)
 """
-import os, json, base64, sqlite3, threading, time, logging, hmac, hashlib, random
+import os, json, base64, sqlite3, threading, time, logging, hmac, hashlib, random, io
 import requests as http_requests
+from PIL import Image
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
@@ -960,6 +961,29 @@ def api_pet_configure(req: PetConfigRequest, user: str = Depends(get_current_use
     _save_json(slot / "pet_config.json", config)
     return {"ok": True, "config": config}
 
+@app.post("/api/pet/upload-photo")
+async def api_pet_upload_photo(file: UploadFile = File(...), user: str = Depends(get_current_user)):
+    """Upload a real pet photo to use as reference for pixel art generation."""
+    contents = await file.read()
+    if len(contents) > 10 * 1024 * 1024:
+        raise HTTPException(400, "Arquivo muito grande (max 10MB)")
+    slot = _slot_dir(user, _get_active_slot(user))
+    photo_path = slot / "pet_reference.jpg"
+    photo_path.write_bytes(contents)
+    config = _load_json(slot / "pet_config.json") or {}
+    config["has_reference_photo"] = True
+    _save_json(slot / "pet_config.json", config)
+    return {"ok": True}
+
+@app.get("/api/pet/reference-photo")
+def api_pet_reference_photo(user: str = Depends(get_current_user)):
+    """Return the uploaded real pet photo."""
+    slot = _slot_dir(user, _get_active_slot(user))
+    photo_path = slot / "pet_reference.jpg"
+    if not photo_path.exists():
+        raise HTTPException(404, "Sem foto de referencia")
+    return FileResponse(photo_path, media_type="image/jpeg")
+
 @app.get("/api/pet/config")
 def api_pet_config(user: str = Depends(get_current_user)):
     slot = _slot_dir(user, _get_active_slot(user))
@@ -1173,7 +1197,7 @@ def generate_pet_image(timezone: str = "America/Sao_Paulo", user: str = None):
     try:
         date_str = now.strftime("%d de %B de %Y")
         event_response = client.responses.create(
-            model="gpt-5.2",
+            model="gpt-4.1-mini",
             tools=[{"type": "web_search"}],
             input=(
                 f"Hoje e {date_str}. Encontre 1 evento curioso, engraçado ou feriado "
@@ -1219,7 +1243,24 @@ def generate_pet_image(timezone: str = "America/Sao_Paulo", user: str = None):
     pet_current_path = slot / "pet_current.png"
     previous_response_id = pet_state.get("last_response_id") if pet_state else None
 
+    # Check if user uploaded a real pet reference photo
+    pet_reference_path = slot / "pet_reference.jpg"
+    if pet_reference_path.exists():
+        creative_prompt = (
+            "REFERENCE PHOTO: The attached photo shows the REAL pet this pixel art is based on. "
+            "You MUST match its exact fur color, pattern, markings, eye color and distinctive features "
+            "in the pixel art style. This is the #1 priority for character design. "
+        ) + creative_prompt
+
     input_content = [{"type": "input_text", "text": creative_prompt}]
+
+    # Pass real pet photo as primary visual reference if available
+    if pet_reference_path.exists():
+        ref_b64 = _read_file_b64(pet_reference_path)
+        input_content.append({
+            "type": "input_image",
+            "image_url": f"data:image/jpeg;base64,{ref_b64}",
+        })
 
     # Pass previous pet image as visual reference — key for character consistency
     if pet_current_path.exists():
@@ -1232,7 +1273,7 @@ def generate_pet_image(timezone: str = "America/Sao_Paulo", user: str = None):
     gen_kwargs = {
         "model": "gpt-5.2",
         "input": [{"role": "user", "content": input_content}],
-        "tools": [{"type": "image_generation", "quality": "medium", "size": "1024x1024", "background": "transparent"}],
+        "tools": [{"type": "image_generation", "quality": "high", "size": "1024x1024", "output_format": "png", "background": "transparent"}],
         "store": True,
     }
     if previous_response_id:
@@ -1247,8 +1288,10 @@ def generate_pet_image(timezone: str = "America/Sao_Paulo", user: str = None):
             break
 
     if image_data:
-        pet_current_path.write_bytes(base64.b64decode(image_data))
-        logger.info("Pet image generated and saved")
+        raw_bytes = base64.b64decode(image_data)
+        img = Image.open(io.BytesIO(raw_bytes))
+        img.save(pet_current_path, "PNG", optimize=True)
+        logger.info("Pet image generated, optimized and saved")
     else:
         logger.warning("No image data in response")
 
@@ -1267,7 +1310,7 @@ def generate_pet_image(timezone: str = "America/Sao_Paulo", user: str = None):
             f"Não use aspas, markdown ou numeração."
         )
         caption_resp = client.responses.create(
-            model="gpt-5.2",
+            model="gpt-4.1-mini",
             input=caption_prompt,
         )
         raw_caption = caption_resp.output_text.strip()
@@ -1334,7 +1377,7 @@ def generate_pet_phrases(timezone: str = "America/Sao_Paulo", user: str = None):
             now = datetime.now()
         date_str = now.strftime("%d de %B de %Y")
         event_response = client.responses.create(
-            model="gpt-5.2",
+            model="gpt-4.1-mini",
             tools=[{"type": "web_search"}],
             input=(
                 f"Hoje e {date_str}. Encontre 1 evento curioso, engraçado ou feriado "
@@ -1356,7 +1399,7 @@ def generate_pet_phrases(timezone: str = "America/Sao_Paulo", user: str = None):
         f"Tom: {'preocupado e urgente' if health_score < 40 else 'animado e orgulhoso' if health_score > 80 else 'dedicado e cuidadoso'}.\n"
         f"Não use aspas, markdown ou numeração."
     )
-    caption_resp = client.responses.create(model="gpt-5.2", input=caption_prompt)
+    caption_resp = client.responses.create(model="gpt-4.1-mini", input=caption_prompt)
     raw_caption = caption_resp.output_text.strip()
     phrases = [l.strip() for l in raw_caption.split('\n') if l.strip()][:3]
     caption = phrases[0] if phrases else raw_caption.strip('"').strip("'")
