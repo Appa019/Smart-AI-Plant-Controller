@@ -1,5 +1,5 @@
 # Hoya Pet - Smart AI Plant Controller
-**Link do Site: http://163.176.169.232/**
+**Link do Site: http://163.176.172.223/**
 
 Sistema IoT inteligente de monitoramento e irrigacao automatica para plantas, com pet virtual que reage ao estado da planta.
 
