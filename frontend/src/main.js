@@ -1361,6 +1361,75 @@ function initNavScroll() {
     }, { passive: true });
 }
 
+function initPresentation() {
+    const overlay = $('presOverlay');
+    const track = $('presTrack');
+    if (!overlay || !track) return;
+
+    const slides = track.querySelectorAll('.pres-slide');
+    const dots = $('presDots')?.querySelectorAll('.pres-dot') || [];
+    const counter = $('presCounter');
+    const total = slides.length;
+    let cur = 0;
+
+    function goToSlide(i) {
+        if (i < 0) i = total - 1;
+        if (i >= total) i = 0;
+        slides.forEach((s, idx) => {
+            s.classList.remove('active', 'pres-exit-left');
+            if (idx === cur && idx !== i) s.classList.add('pres-exit-left');
+        });
+        dots.forEach(d => d.classList.remove('active'));
+        slides[i].classList.add('active');
+        dots[i]?.classList.add('active');
+        if (counter) counter.textContent = `${i + 1} / ${total}`;
+        cur = i;
+    }
+
+    function openPres() {
+        overlay.classList.add('active');
+        document.body.classList.add('pres-open');
+        goToSlide(0);
+    }
+
+    function closePres() {
+        overlay.classList.remove('active');
+        document.body.classList.remove('pres-open');
+    }
+
+    $('openPresBtn')?.addEventListener('click', () => {
+        openPres();
+        overlay.setAttribute('tabindex', '-1');
+        overlay.focus();
+    });
+    $('presClose')?.addEventListener('click', closePres);
+    $('presPrev')?.addEventListener('click', () => goToSlide(cur - 1));
+    $('presNext')?.addEventListener('click', () => goToSlide(cur + 1));
+
+    dots.forEach(d => {
+        d.addEventListener('click', () => goToSlide(parseInt(d.dataset.i, 10)));
+    });
+
+    overlay.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closePres();
+        if (e.key === 'ArrowLeft') goToSlide(cur - 1);
+        if (e.key === 'ArrowRight') goToSlide(cur + 1);
+    });
+
+    // Touch swipe support
+    let touchStartX = 0;
+    overlay.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    overlay.addEventListener('touchend', (e) => {
+        const diff = e.changedTouches[0].screenX - touchStartX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) goToSlide(cur - 1);
+            else goToSlide(cur + 1);
+        }
+    }, { passive: true });
+}
+
 function initLanding() {
     $('landingLoginBtn')?.addEventListener('click', () => showPage('login'));
     $('landingCtaTop')?.addEventListener('click', () => showPage('login'));
@@ -1369,6 +1438,7 @@ function initLanding() {
         el.addEventListener('click', e => { e.preventDefault(); showPage('landing'); })
     );
     initCarousel();
+    initPresentation();
     initNavScroll();
 }
 

@@ -31,7 +31,12 @@
                     </picture>
                     <span class="lp-nav-title">Hoya Pet</span>
                 </div>
-                <button class="lp-nav-btn" id="landingLoginBtn">Entrar</button>
+                <button class="lp-nav-link" id="openPresBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+                        <rect x="2" y="3" width="20" height="14" rx="0"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                    Apresentação
+                </button>
             </div>
         </nav>
 
@@ -66,7 +71,7 @@
                 <h2 class="lp-section-title">Monitoramento inteligente, com personalidade.</h2>
             </div>
             <div class="lp-features-grid">
-                <div class="lp-feat-card lp-feat-card--tall lp-reveal">
+                <div class="lp-feat-card lp-reveal">
                     <picture>
                         <source srcset="/farm_temp_icon.webp" type="image/webp">
                         <img src="/farm_temp_icon.png" alt="" class="lp-feat-icon" />
@@ -92,7 +97,7 @@
                     <p>Gato ou cachorro pixel art que reage ao estado da planta. Muda de humor e conversa com voce.</p>
                     <span class="lp-feat-stat">2 updates/dia</span>
                 </div>
-                <div class="lp-feat-card lp-feat-card--wide lp-reveal">
+                <div class="lp-feat-card lp-reveal">
                     <picture>
                         <source srcset="/cozy_plant_icon.webp" type="image/webp">
                         <img src="/cozy_plant_icon.png" alt="" class="lp-feat-icon" style="image-rendering:pixelated;" />
@@ -190,7 +195,7 @@
                 <h2 class="lp-section-title">Stack completa, do firmware ao browser.</h2>
                 <p>O ESP32-C3 le o sensor capacitivo (ADC 12-bit) e o AHT10 via I2C, e envia tudo por HTTP POST pro servidor a cada 10 segundos. O firmware e C++ puro, com calibracao automatica.</p>
                 <p>O backend e um unico server.py em FastAPI (~1800 linhas) que faz tudo: auth com JWT, ingestao dos dados do ESP32, historico em SQLite, irrigacao remota, e 3 chamadas diferentes pra OpenAI &mdash; Vision pra identificar planta, Responses API pra gerar o pixel art, e Web Search pras frases do dia.</p>
-                <p>Frontend e JS vanilla com Vite, sem framework. Roda num VPS Oracle Cloud com Nginx e Systemd.</p>
+                <p>Frontend e JS vanilla com Vite, sem framework. Roda na Vercel com Supabase.</p>
                 <a href="https://github.com/Appa019/Smart-AI-Plant-Controller" target="_blank" rel="noopener"
                     class="lp-tech-link">Ver codigo no GitHub &rarr;</a>
             </div>
@@ -228,7 +233,8 @@
                 <div class="lp-pill-group">
                     <span class="lp-pill-label">Infra</span>
                     <div class="lp-pill-row">
-                        <span class="lp-pill lp-reveal">Oracle Cloud</span>
+                        <span class="lp-pill lp-reveal">Vercel</span>
+                        <span class="lp-pill lp-reveal">Supabase</span>
                         <span class="lp-pill lp-reveal">Nginx</span>
                         <span class="lp-pill lp-reveal">Systemd</span>
                     </div>
@@ -265,6 +271,228 @@
                 </div>
             </div>
         </footer>
+
+        <!-- PRESENTATION OVERLAY -->
+        <div id="presOverlay" class="pres-overlay">
+            <div class="pres-header">
+                <span class="pres-counter" id="presCounter">1 / 13</span>
+                <button class="pres-close" id="presClose" aria-label="Fechar apresentação">&times;</button>
+            </div>
+
+            <div class="pres-track" id="presTrack">
+
+                <!-- Slide 1: Capa -->
+                <div class="pres-slide active" data-slide="0">
+                    <div class="pres-slide-inner pres-slide--cover">
+                        <div class="pres-cover-icon">&#127891;</div>
+                        <h2 class="pres-title-xl">Gamificação e Educação Financeira</h2>
+                        <p class="pres-subtitle">Como tornar o aprendizado financeiro envolvente para jovens</p>
+                    </div>
+                </div>
+
+                <!-- Slide 2: O Problema -->
+                <div class="pres-slide" data-slide="1">
+                    <div class="pres-slide-inner">
+                        <span class="pres-icon">&#9888;&#65039;</span>
+                        <h2 class="pres-title">O Problema</h2>
+                        <div class="pres-stat">71%</div>
+                        <p class="pres-body">dos jovens brasileiros <strong>não recebem</strong> educação financeira formal</p>
+                        <cite class="pres-cite">S&amp;P Global Financial Literacy Survey (Klapper, Lusardi &amp; van Oudheusden, 2015)</cite>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Cenário Brasil -->
+                <div class="pres-slide" data-slide="2">
+                    <div class="pres-slide-inner pres-slide--split">
+                        <div class="pres-col">
+                            <h2 class="pres-title">Cenário Brasil</h2>
+                            <div class="pres-stat">74ª</div>
+                            <p class="pres-body">posição no ranking global de alfabetização financeira — apenas <strong>35%</strong> dos adultos são financeiramente alfabetizados</p>
+                            <cite class="pres-cite">S&amp;P Global FinLit Survey, 2015</cite>
+                        </div>
+                        <div class="pres-col pres-col--img">
+                            <img src="/screenshots/pres_dashboard.webp" alt="Dashboard Hoya Pet" class="pres-img" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4: Por Que Jovens? -->
+                <div class="pres-slide" data-slide="3">
+                    <div class="pres-slide-inner">
+                        <span class="pres-icon">&#128118;</span>
+                        <h2 class="pres-title">Por Que Jovens?</h2>
+                        <p class="pres-body pres-body--lg">Hábitos financeiros se formam <strong>antes dos 7 anos</strong></p>
+                        <cite class="pres-cite">Whitebread &amp; Bingham, 2013 — University of Cambridge</cite>
+                    </div>
+                </div>
+
+                <!-- Slide 5: O Que é Gamificação -->
+                <div class="pres-slide" data-slide="4">
+                    <div class="pres-slide-inner">
+                        <span class="pres-icon">&#127918;</span>
+                        <h2 class="pres-title">O Que é Gamificação</h2>
+                        <p class="pres-body pres-body--lg">Uso de <strong>mecânicas de jogos</strong> em contextos não-lúdicos para aumentar engajamento</p>
+                        <cite class="pres-cite">Deterding, Dixon, Khaled &amp; Nacke (2011)</cite>
+                    </div>
+                </div>
+
+                <!-- Slide 6: Gamificação Funciona? -->
+                <div class="pres-slide" data-slide="5">
+                    <div class="pres-slide-inner">
+                        <h2 class="pres-title">Gamificação Funciona?</h2>
+                        <div class="pres-chart">
+                            <div class="pres-bar-group">
+                                <div class="pres-bar-label">Sem gamificação</div>
+                                <div class="pres-bar-track">
+                                    <div class="pres-bar" style="width: 66%"></div>
+                                </div>
+                                <span class="pres-bar-value">66%</span>
+                            </div>
+                            <div class="pres-bar-group">
+                                <div class="pres-bar-label">Com gamificação</div>
+                                <div class="pres-bar-track">
+                                    <div class="pres-bar pres-bar--accent" style="width: 100%"></div>
+                                </div>
+                                <span class="pres-bar-value">+34%</span>
+                            </div>
+                        </div>
+                        <p class="pres-body">Aumento de <strong>34%</strong> na retenção de conhecimento</p>
+                        <cite class="pres-cite">Hamari, Koivisto &amp; Sarsa (2014) — Hawaii International Conference</cite>
+                    </div>
+                </div>
+
+                <!-- Slide 7: Caso Hoya Pet -->
+                <div class="pres-slide" data-slide="6">
+                    <div class="pres-slide-inner pres-slide--split">
+                        <div class="pres-col">
+                            <h2 class="pres-title">Caso Hoya Pet</h2>
+                            <p class="pres-body">Como o Hoya Pet usa mecânicas de jogo — <strong>pet virtual</strong> e <strong>feedback em tempo real</strong> — para engajar usuários</p>
+                        </div>
+                        <div class="pres-col pres-col--img">
+                            <img src="/screenshots/pres_dashboard_mobile.webp" alt="Pet virtual Hoya Pet" class="pres-img" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 8: Mecânicas que Funcionam -->
+                <div class="pres-slide" data-slide="7">
+                    <div class="pres-slide-inner">
+                        <span class="pres-icon">&#9881;&#65039;</span>
+                        <h2 class="pres-title">Mecânicas que Funcionam</h2>
+                        <ul class="pres-list">
+                            <li>Feedback imediato</li>
+                            <li>Progressão visível</li>
+                            <li>Recompensas intrínsecas</li>
+                            <li>Narrativa</li>
+                        </ul>
+                        <cite class="pres-cite">Ryan &amp; Deci (2000) — Self-Determination Theory</cite>
+                    </div>
+                </div>
+
+                <!-- Slide 9: Proposta de Aplicação -->
+                <div class="pres-slide" data-slide="8">
+                    <div class="pres-slide-inner">
+                        <span class="pres-icon">&#128161;</span>
+                        <h2 class="pres-title">Proposta de Aplicação</h2>
+                        <p class="pres-body pres-body--lg">Pet virtual que reage a decisões financeiras — <strong>economizar = pet feliz</strong></p>
+                    </div>
+                </div>
+
+                <!-- Slide 10: Impacto Esperado -->
+                <div class="pres-slide" data-slide="9">
+                    <div class="pres-slide-inner">
+                        <h2 class="pres-title">Impacto Esperado</h2>
+                        <div class="pres-chart">
+                            <div class="pres-bar-group">
+                                <div class="pres-bar-label">Inadimplência padrão</div>
+                                <div class="pres-bar-track">
+                                    <div class="pres-bar" style="width: 100%"></div>
+                                </div>
+                                <span class="pres-bar-value">100%</span>
+                            </div>
+                            <div class="pres-bar-group">
+                                <div class="pres-bar-label">Com gamificação</div>
+                                <div class="pres-bar-track">
+                                    <div class="pres-bar pres-bar--accent" style="width: 76%"></div>
+                                </div>
+                                <span class="pres-bar-value">-24%</span>
+                            </div>
+                        </div>
+                        <p class="pres-body">Programas gamificados reduzem inadimplência jovem em até <strong>24%</strong></p>
+                        <cite class="pres-cite">Kaiser, Lusardi, Menkhoff &amp; Urban (2022) — Journal of Financial Economics</cite>
+                    </div>
+                </div>
+
+                <!-- Slide 11: Tecnologia Acessível -->
+                <div class="pres-slide" data-slide="10">
+                    <div class="pres-slide-inner pres-slide--split">
+                        <div class="pres-col">
+                            <h2 class="pres-title">Tecnologia Acessível</h2>
+                            <p class="pres-body">Browser-only, sem app store, funciona em <strong>qualquer celular</strong></p>
+                            <div class="pres-stat pres-stat--sm">87.2%</div>
+                            <p class="pres-body">dos lares brasileiros com internet via smartphone</p>
+                            <cite class="pres-cite">IBGE PNAD Contínua 2023</cite>
+                        </div>
+                        <div class="pres-col pres-col--img">
+                            <img src="/screenshots/pres_dashboard_scroll.webp" alt="Métricas Hoya Pet" class="pres-img" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 12: Conclusão -->
+                <div class="pres-slide" data-slide="11">
+                    <div class="pres-slide-inner pres-slide--cover">
+                        <div class="pres-cover-icon">&#127793;</div>
+                        <h2 class="pres-title-xl">Gamificação não é só diversão</h2>
+                        <p class="pres-subtitle">É ferramenta pedagógica validada pela ciência</p>
+                    </div>
+                </div>
+
+                <!-- Slide 13: CTA + QR Code -->
+                <div class="pres-slide" data-slide="12">
+                    <div class="pres-slide-inner pres-slide--cover">
+                        <h2 class="pres-title">Teste Agora</h2>
+                        <div class="pres-qr">
+                            <img src="/screenshots/qr_site.svg" alt="QR Code para o site" class="pres-qr-img" />
+                        </div>
+                        <p class="pres-body pres-body--lg">Escaneie o QR code ou acesse:</p>
+                        <p class="pres-url">projetoirrigacao.vercel.app</p>
+                        <div class="pres-credentials">
+                            <div class="pres-cred-row">
+                                <span class="pres-cred-label">Email</span>
+                                <span class="pres-cred-value">demo@hoyapet.com</span>
+                            </div>
+                            <div class="pres-cred-row">
+                                <span class="pres-cred-label">Senha</span>
+                                <span class="pres-cred-value">demo123</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pres-footer">
+                <button class="pres-arrow" id="presPrev" aria-label="Slide anterior">&#8592;</button>
+                <div class="pres-dots" id="presDots">
+                    <button class="pres-dot active" data-i="0"></button>
+                    <button class="pres-dot" data-i="1"></button>
+                    <button class="pres-dot" data-i="2"></button>
+                    <button class="pres-dot" data-i="3"></button>
+                    <button class="pres-dot" data-i="4"></button>
+                    <button class="pres-dot" data-i="5"></button>
+                    <button class="pres-dot" data-i="6"></button>
+                    <button class="pres-dot" data-i="7"></button>
+                    <button class="pres-dot" data-i="8"></button>
+                    <button class="pres-dot" data-i="9"></button>
+                    <button class="pres-dot" data-i="10"></button>
+                    <button class="pres-dot" data-i="11"></button>
+                    <button class="pres-dot" data-i="12"></button>
+                </div>
+                <button class="pres-arrow" id="presNext" aria-label="Próximo slide">&#8594;</button>
+            </div>
+        </div>
+
     </div>
 
     <!-- LOGIN -->
