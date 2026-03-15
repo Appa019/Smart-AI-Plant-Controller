@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Nunito:wght@400;600;700;800&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/src/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" defer></script>
     <meta name="theme-color" content="#faf4e1" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -194,7 +195,7 @@
                 <span class="lp-label">Por baixo do capo</span>
                 <h2 class="lp-section-title">Stack completa, do firmware ao browser.</h2>
                 <p>O ESP32-C3 le o sensor capacitivo (ADC 12-bit) e o AHT10 via I2C, e envia tudo por HTTP POST pro servidor a cada 10 segundos. O firmware e C++ puro, com calibracao automatica.</p>
-                <p>O backend e um unico server.py em FastAPI (~1800 linhas) que faz tudo: auth com JWT, ingestao dos dados do ESP32, historico em SQLite, irrigacao remota, e 3 chamadas diferentes pra OpenAI &mdash; Vision pra identificar planta, Responses API pra gerar o pixel art, e Web Search pras frases do dia.</p>
+                <p>O backend e um unico server.py em FastAPI (~1800 linhas) que faz tudo: auth com JWT, ingestao dos dados do ESP32, historico em SQLite, irrigacao remota, e 3 chamadas diferentes pra OpenAI - Vision pra identificar planta, Responses API pra gerar o pixel art, e Web Search pras frases do dia.</p>
                 <p>Frontend e JS vanilla com Vite, sem framework. Roda na Vercel com Supabase.</p>
                 <a href="https://github.com/Appa019/Smart-AI-Plant-Controller" target="_blank" rel="noopener"
                     class="lp-tech-link">Ver codigo no GitHub &rarr;</a>
@@ -274,9 +275,10 @@
 
         <!-- PRESENTATION OVERLAY -->
         <div id="presOverlay" class="pres-overlay">
-            <div class="pres-header">
-                <span class="pres-counter" id="presCounter">1 / 13</span>
+            <div class="pres-header" style="position: relative;">
+                <span class="pres-counter" id="presCounter">1 / 19</span>
                 <button class="pres-close" id="presClose" aria-label="Fechar apresentação">&times;</button>
+                <div class="pres-progress" style="width: 5.26%"></div>
             </div>
 
             <div class="pres-track" id="presTrack">
@@ -284,189 +286,621 @@
                 <!-- Slide 1: Capa -->
                 <div class="pres-slide active" data-slide="0">
                     <div class="pres-slide-inner pres-slide--cover">
-                        <div class="pres-cover-icon">&#127891;</div>
-                        <h2 class="pres-title-xl">Gamificação e Educação Financeira</h2>
-                        <p class="pres-subtitle">Como tornar o aprendizado financeiro envolvente para jovens</p>
+                        <picture class="pres-cover-logo">
+                            <source srcset="/pixel_hoya_logo.webp" type="image/webp">
+                            <img src="/pixel_hoya_logo.png" alt="Hoya Pet" width="64" height="64" style="image-rendering: pixelated;" />
+                        </picture>
+                        <h2 class="pres-title-xl pres-anim-title">Hoya Pet</h2>
+                        <p class="pres-subtitle pres-anim-sub">Engajamento jovem em sustentabilidade por meio de IoT, gamificação e pets virtuais</p>
+                        <div class="pres-cover-meta pres-anim-fade">
+                            <span>Altos do Butantã</span>
+                            <span class="pres-meta-sep"></span>
+                            <span>Março 2026</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Slide 2: O Problema -->
+                <!-- Slide 2: QR Code - Acompanhe -->
                 <div class="pres-slide" data-slide="1">
-                    <div class="pres-slide-inner">
-                        <span class="pres-icon">&#9888;&#65039;</span>
-                        <h2 class="pres-title">O Problema</h2>
-                        <div class="pres-stat">71%</div>
-                        <p class="pres-body">dos jovens brasileiros <strong>não recebem</strong> educação financeira formal</p>
-                        <cite class="pres-cite">S&amp;P Global Financial Literacy Survey (Klapper, Lusardi &amp; van Oudheusden, 2015)</cite>
+                    <div class="pres-slide-inner pres-slide--cover">
+                        <h2 class="pres-title pres-anim-title">Acompanhe pelo celular</h2>
+                        <div class="pres-qr pres-anim-stagger">
+                            <img src="/screenshots/qr_site.svg" alt="QR Code para o site" class="pres-qr-img pres-qr-img--big" data-tilt data-tilt-max="12" data-tilt-glare data-tilt-max-glare="0.3" />
+                        </div>
+                        <p class="pres-url pres-anim-fade">projetoirrigacao.vercel.app</p>
                     </div>
                 </div>
 
-                <!-- Slide 3: Cenário Brasil -->
+                <!-- Slide 3: O Contexto -->
                 <div class="pres-slide" data-slide="2">
-                    <div class="pres-slide-inner pres-slide--split">
-                        <div class="pres-col">
-                            <h2 class="pres-title">Cenário Brasil</h2>
-                            <div class="pres-stat">74ª</div>
-                            <p class="pres-body">posição no ranking global de alfabetização financeira — apenas <strong>35%</strong> dos adultos são financeiramente alfabetizados</p>
-                            <cite class="pres-cite">S&amp;P Global FinLit Survey, 2015</cite>
+                    <div class="pres-slide-inner">
+                        <div class="pres-slide-label">Contexto</div>
+                        <h2 class="pres-title">Jovens e Sustentabilidade: Uma Desconexão</h2>
+                        <div class="pres-stats-row">
+                            <div class="pres-stat-card pres-anim-stagger" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.15" data-tilt-speed="400">
+                                <div class="pres-stat">73%</div>
+                                <p class="pres-stat-desc">dos jovens se dizem preocupados com meio ambiente</p>
+                            </div>
+                            <div class="pres-stat-card pres-anim-stagger" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.15" data-tilt-speed="400">
+                                <div class="pres-stat">12%</div>
+                                <p class="pres-stat-desc">participam de alguma ação sustentável no dia a dia</p>
+                            </div>
                         </div>
-                        <div class="pres-col pres-col--img">
-                            <img src="/screenshots/pres_dashboard.webp" alt="Dashboard Hoya Pet" class="pres-img" loading="lazy" />
-                        </div>
+                        <p class="pres-body">A intenção existe, mas faltam <strong>ferramentas práticas e envolventes</strong> que traduzam preocupação em ação cotidiana</p>
+                        <cite class="pres-cite">Deloitte Global 2024 Gen Z and Millennial Survey</cite>
                     </div>
                 </div>
 
-                <!-- Slide 4: Por Que Jovens? -->
+                <!-- Slide 3: O Problema -->
                 <div class="pres-slide" data-slide="3">
                     <div class="pres-slide-inner">
-                        <span class="pres-icon">&#128118;</span>
-                        <h2 class="pres-title">Por Que Jovens?</h2>
-                        <p class="pres-body pres-body--lg">Hábitos financeiros se formam <strong>antes dos 7 anos</strong></p>
-                        <cite class="pres-cite">Whitebread &amp; Bingham, 2013 — University of Cambridge</cite>
+                        <div class="pres-slide-label">Problema</div>
+                        <h2 class="pres-title">Por Que Jovens Não se Engajam?</h2>
+                        <div class="pres-cards-grid">
+                            <div class="pres-info-card pres-anim-stagger" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.2" data-tilt-speed="400">
+                                <picture class="pres-card-icon">
+                                    <source srcset="/cozy_plant_icon.webp" type="image/webp">
+                                    <img src="/cozy_plant_icon.png" alt="" width="28" height="28" style="image-rendering: pixelated;" />
+                                </picture>
+                                <h3>Abstração</h3>
+                                <p>Sustentabilidade parece distante, teórica e sem resultado visível</p>
+                            </div>
+                            <div class="pres-info-card pres-anim-stagger" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.2" data-tilt-speed="400">
+                                <picture class="pres-card-icon">
+                                    <source srcset="/farm_water_can_icon.webp" type="image/webp">
+                                    <img src="/farm_water_can_icon.png" alt="" width="28" height="28" style="image-rendering: pixelated;" />
+                                </picture>
+                                <h3>Falta de Ferramenta</h3>
+                                <p>Não existem plataformas acessíveis que conectem ação real com feedback imediato</p>
+                            </div>
+                            <div class="pres-info-card pres-anim-stagger" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.2" data-tilt-speed="400">
+                                <picture class="pres-card-icon">
+                                    <source srcset="/pixel_dog.webp" type="image/webp">
+                                    <img src="/pixel_dog.png" alt="" width="28" height="28" style="image-rendering: pixelated;" />
+                                </picture>
+                                <h3>Sem Comunidade</h3>
+                                <p>Iniciativas individuais não criam pertencimento nem engajamento coletivo</p>
+                            </div>
+                        </div>
+                        <cite class="pres-cite">UNEP -Global Environment Outlook for Youth, 2024</cite>
                     </div>
                 </div>
 
-                <!-- Slide 5: O Que é Gamificação -->
+                <!-- Slide 4: O Altos do Butantã Hoje -->
                 <div class="pres-slide" data-slide="4">
                     <div class="pres-slide-inner">
-                        <span class="pres-icon">&#127918;</span>
-                        <h2 class="pres-title">O Que é Gamificação</h2>
-                        <p class="pres-body pres-body--lg">Uso de <strong>mecânicas de jogos</strong> em contextos não-lúdicos para aumentar engajamento</p>
-                        <cite class="pres-cite">Deterding, Dixon, Khaled &amp; Nacke (2011)</cite>
-                    </div>
-                </div>
-
-                <!-- Slide 6: Gamificação Funciona? -->
-                <div class="pres-slide" data-slide="5">
-                    <div class="pres-slide-inner">
-                        <h2 class="pres-title">Gamificação Funciona?</h2>
-                        <div class="pres-chart">
-                            <div class="pres-bar-group">
-                                <div class="pres-bar-label">Sem gamificação</div>
-                                <div class="pres-bar-track">
-                                    <div class="pres-bar" style="width: 66%"></div>
-                                </div>
-                                <span class="pres-bar-value">66%</span>
+                        <div class="pres-slide-label">Pesquisa</div>
+                        <h2 class="pres-title">O Altos do Butantã Hoje</h2>
+                        <div class="pres-cards-grid">
+                            <div class="pres-info-card pres-anim-stagger" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.2" data-tilt-speed="400">
+                                <picture class="pres-card-icon">
+                                    <source srcset="/cozy_plant_icon.webp" type="image/webp">
+                                    <img src="/cozy_plant_icon.png" alt="" width="28" height="28" style="image-rendering: pixelated;" />
+                                </picture>
+                                <h3>Horta Invisível</h3>
+                                <p>Existe horta que produz alimentos, mas poucos moradores sabem. Cuidado concentrado em quem já se interessa</p>
                             </div>
-                            <div class="pres-bar-group">
-                                <div class="pres-bar-label">Com gamificação</div>
-                                <div class="pres-bar-track">
-                                    <div class="pres-bar pres-bar--accent" style="width: 100%"></div>
-                                </div>
-                                <span class="pres-bar-value">+34%</span>
+                            <div class="pres-info-card pres-anim-stagger" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.2" data-tilt-speed="400">
+                                <picture class="pres-card-icon">
+                                    <source srcset="/farm_water_can_icon.webp" type="image/webp">
+                                    <img src="/farm_water_can_icon.png" alt="" width="28" height="28" style="image-rendering: pixelated;" />
+                                </picture>
+                                <h3>Energia Solar Sem Dados</h3>
+                                <p>Painéis solares instalados na garagem, mas sem medição. Infraestrutura subutilizada</p>
+                            </div>
+                            <div class="pres-info-card pres-anim-stagger" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.2" data-tilt-speed="400">
+                                <picture class="pres-card-icon">
+                                    <source srcset="/pixel_cat.webp" type="image/webp">
+                                    <img src="/pixel_cat.png" alt="" width="28" height="28" style="image-rendering: pixelated;" />
+                                </picture>
+                                <h3>Jovens Desconectados</h3>
+                                <p>Moradores mais velhos são os engajados. Jovens universitários inquilinos não participam</p>
                             </div>
                         </div>
-                        <p class="pres-body">Aumento de <strong>34%</strong> na retenção de conhecimento</p>
-                        <cite class="pres-cite">Hamari, Koivisto &amp; Sarsa (2014) — Hawaii International Conference</cite>
+                        <cite class="pres-cite">Pesquisa de campo -Altos do Butantã, 2025</cite>
                     </div>
                 </div>
 
-                <!-- Slide 7: Caso Hoya Pet -->
-                <div class="pres-slide" data-slide="6">
+                <!-- Slide 5: O Que Já Existe vs O Que Falta -->
+                <div class="pres-slide" data-slide="5">
                     <div class="pres-slide-inner pres-slide--split">
                         <div class="pres-col">
-                            <h2 class="pres-title">Caso Hoya Pet</h2>
-                            <p class="pres-body">Como o Hoya Pet usa mecânicas de jogo — <strong>pet virtual</strong> e <strong>feedback em tempo real</strong> — para engajar usuários</p>
+                            <div class="pres-slide-label">Diagnóstico</div>
+                            <h2 class="pres-title">O Que Já Existe</h2>
+                            <ul class="pres-check-list pres-check-list--yes">
+                                <li>Horta comunitária</li>
+                                <li>Painéis solares</li>
+                                <li>Compostagem</li>
+                                <li>Pontos de reciclagem</li>
+                                <li>Grupos de WhatsApp</li>
+                            </ul>
                         </div>
-                        <div class="pres-col pres-col--img">
-                            <img src="/screenshots/pres_dashboard_mobile.webp" alt="Pet virtual Hoya Pet" class="pres-img" loading="lazy" />
+                        <div class="pres-col">
+                            <h2 class="pres-title">O Que Falta</h2>
+                            <ul class="pres-check-list pres-check-list--no">
+                                <li>Medição de impacto real</li>
+                                <li>Engajamento jovem</li>
+                                <li>Feedback visual e emocional</li>
+                                <li>Sustentabilidade financeira</li>
+                                <li>Conexão emocional (punição não funciona)</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 8: Mecânicas que Funcionam -->
+                <!-- Slide 6: O Insight -->
+                <div class="pres-slide" data-slide="6">
+                    <div class="pres-slide-inner">
+                        <div class="pres-slide-label">Insight</div>
+                        <h2 class="pres-title">Pets Criam Responsabilidade</h2>
+                        <div class="pres-stats-row">
+                            <div class="pres-stat-card pres-anim-stagger" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.15" data-tilt-speed="400">
+                                <div class="pres-stat">149M</div>
+                                <p class="pres-stat-desc">de pets no Brasil em 2024 -mais pets que crianças</p>
+                            </div>
+                            <div class="pres-stat-card pres-anim-stagger" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.15" data-tilt-speed="400">
+                                <div class="pres-stat">67%</div>
+                                <p class="pres-stat-desc">dos lares brasileiros possuem pelo menos um animal de estimação</p>
+                            </div>
+                        </div>
+                        <p class="pres-body">Cuidar de um pet ensina <strong>rotina, empatia e responsabilidade</strong>. E se aplicássemos essa mecânica ao cuidado com plantas?</p>
+                        <cite class="pres-cite">Instituto Pet Brasil / IBGE PNAD 2023</cite>
+                    </div>
+                </div>
+
+                <!-- Slide 7: Condomínios e Pets -->
                 <div class="pres-slide" data-slide="7">
                     <div class="pres-slide-inner">
-                        <span class="pres-icon">&#9881;&#65039;</span>
-                        <h2 class="pres-title">Mecânicas que Funcionam</h2>
-                        <ul class="pres-list">
-                            <li>Feedback imediato</li>
-                            <li>Progressão visível</li>
-                            <li>Recompensas intrínsecas</li>
-                            <li>Narrativa</li>
-                        </ul>
-                        <cite class="pres-cite">Ryan &amp; Deci (2000) — Self-Determination Theory</cite>
-                    </div>
-                </div>
-
-                <!-- Slide 9: Proposta de Aplicação -->
-                <div class="pres-slide" data-slide="8">
-                    <div class="pres-slide-inner">
-                        <span class="pres-icon">&#128161;</span>
-                        <h2 class="pres-title">Proposta de Aplicação</h2>
-                        <p class="pres-body pres-body--lg">Pet virtual que reage a decisões financeiras — <strong>economizar = pet feliz</strong></p>
-                    </div>
-                </div>
-
-                <!-- Slide 10: Impacto Esperado -->
-                <div class="pres-slide" data-slide="9">
-                    <div class="pres-slide-inner">
-                        <h2 class="pres-title">Impacto Esperado</h2>
+                        <div class="pres-slide-label">Contexto Local</div>
+                        <h2 class="pres-title">Pets em Condomínios: Tendência Consolidada</h2>
                         <div class="pres-chart">
                             <div class="pres-bar-group">
-                                <div class="pres-bar-label">Inadimplência padrão</div>
+                                <div class="pres-bar-label">Condomínios pet-friendly</div>
                                 <div class="pres-bar-track">
-                                    <div class="pres-bar" style="width: 100%"></div>
+                                    <div class="pres-bar pres-bar--accent pres-anim-bar" style="--bar-w: 78%"></div>
                                 </div>
-                                <span class="pres-bar-value">100%</span>
+                                <span class="pres-bar-value">78%</span>
                             </div>
                             <div class="pres-bar-group">
-                                <div class="pres-bar-label">Com gamificação</div>
+                                <div class="pres-bar-label">Moradores com pets</div>
                                 <div class="pres-bar-track">
-                                    <div class="pres-bar pres-bar--accent" style="width: 76%"></div>
+                                    <div class="pres-bar pres-bar--accent pres-anim-bar" style="--bar-w: 62%"></div>
                                 </div>
-                                <span class="pres-bar-value">-24%</span>
+                                <span class="pres-bar-value">62%</span>
+                            </div>
+                            <div class="pres-bar-group">
+                                <div class="pres-bar-label">Jovens (18-30) com pets</div>
+                                <div class="pres-bar-track">
+                                    <div class="pres-bar pres-bar--accent pres-anim-bar" style="--bar-w: 55%"></div>
+                                </div>
+                                <span class="pres-bar-value">55%</span>
                             </div>
                         </div>
-                        <p class="pres-body">Programas gamificados reduzem inadimplência jovem em até <strong>24%</strong></p>
-                        <cite class="pres-cite">Kaiser, Lusardi, Menkhoff &amp; Urban (2022) — Journal of Financial Economics</cite>
+                        <p class="pres-body">Jovens em condomínios já têm a <strong>cultura do cuidado</strong>. O Hoya Pet estende isso para o jardim coletivo com um pet virtual</p>
+                        <cite class="pres-cite">Quinto Andar / DataZAP -Relatório Moradia 2024</cite>
                     </div>
                 </div>
 
-                <!-- Slide 11: Tecnologia Acessível -->
-                <div class="pres-slide" data-slide="10">
+                <!-- Slide 8: A Solução -->
+                <div class="pres-slide" data-slide="8">
                     <div class="pres-slide-inner pres-slide--split">
                         <div class="pres-col">
-                            <h2 class="pres-title">Tecnologia Acessível</h2>
-                            <p class="pres-body">Browser-only, sem app store, funciona em <strong>qualquer celular</strong></p>
-                            <div class="pres-stat pres-stat--sm">87.2%</div>
-                            <p class="pres-body">dos lares brasileiros com internet via smartphone</p>
-                            <cite class="pres-cite">IBGE PNAD Contínua 2023</cite>
+                            <div class="pres-slide-label">Solução</div>
+                            <h2 class="pres-title">Hoya Pet: Planta Real, Pet Virtual</h2>
+                            <p class="pres-body">Um sensor IoT no vaso mede <strong>umidade do solo, temperatura e umidade do ar</strong> a cada 10 segundos</p>
+                            <p class="pres-body">A bomba rega <strong>somente quando o solo precisa</strong> -irrigação inteligente baseada em dados reais</p>
+                            <p class="pres-body">Cada planta ganha um <strong>pet virtual em pixel art</strong> gerado por IA que reage ao estado dela em tempo real</p>
                         </div>
                         <div class="pres-col pres-col--img">
-                            <img src="/screenshots/pres_dashboard_scroll.webp" alt="Métricas Hoya Pet" class="pres-img" loading="lazy" />
+                            <img src="/screenshots/pres_dashboard.webp" alt="Dashboard Hoya Pet" class="pres-img" loading="lazy" data-tilt data-tilt-max="5" data-tilt-scale="1.02" data-tilt-glare data-tilt-max-glare="0.1" />
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 12: Conclusão -->
+                <!-- Slide 9: O Pet Virtual -->
+                <div class="pres-slide" data-slide="9">
+                    <div class="pres-slide-inner pres-slide--split">
+                        <div class="pres-col">
+                            <div class="pres-slide-label">Gamificação</div>
+                            <h2 class="pres-title">O Pet Que Cuida da Planta</h2>
+                            <div class="pres-feature-list">
+                                <div class="pres-feature-item pres-anim-stagger">
+                                    <picture class="pres-feat-icon">
+                                        <source srcset="/farm_temp_icon.webp" type="image/webp">
+                                        <img src="/farm_temp_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                    </picture>
+                                    <div>
+                                        <strong>Feedback em tempo real</strong>
+                                        <p>Pet muda de humor conforme a saúde da planta</p>
+                                    </div>
+                                </div>
+                                <div class="pres-feature-item pres-anim-stagger">
+                                    <picture class="pres-feat-icon">
+                                        <source srcset="/farm_soil_icon.webp" type="image/webp">
+                                        <img src="/farm_soil_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                    </picture>
+                                    <div>
+                                        <strong>Progressão visível</strong>
+                                        <p>Gráficos de histórico e estado da planta</p>
+                                    </div>
+                                </div>
+                                <div class="pres-feature-item pres-anim-stagger">
+                                    <picture class="pres-feat-icon">
+                                        <source srcset="/pixel_cat.webp" type="image/webp">
+                                        <img src="/pixel_cat.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                    </picture>
+                                    <div>
+                                        <strong>Vínculo emocional</strong>
+                                        <p>Pixel art gerado por IA com personalidade própria</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pres-col pres-col--img">
+                            <img src="/screenshots/pres_dashboard_mobile.webp" alt="Pet virtual Hoya Pet" class="pres-img" loading="lazy" data-tilt data-tilt-max="5" data-tilt-scale="1.02" data-tilt-glare data-tilt-max-glare="0.1" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 10: Arquitetura Técnica -->
+                <div class="pres-slide" data-slide="10">
+                    <div class="pres-slide-inner">
+                        <div class="pres-slide-label">Tecnologia</div>
+                        <h2 class="pres-title">Arquitetura do Sistema</h2>
+                        <div class="pres-arch">
+                            <div class="pres-arch-node pres-anim-stagger" data-tilt data-tilt-max="6" data-tilt-speed="300">
+                                <picture class="pres-arch-icon">
+                                    <source srcset="/farm_soil_icon.webp" type="image/webp">
+                                    <img src="/farm_soil_icon.png" alt="" width="32" height="32" style="image-rendering: pixelated;" />
+                                </picture>
+                                <strong>ESP32-C3</strong>
+                                <span>Sensores + Bomba</span>
+                            </div>
+                            <div class="pres-arch-arrow pres-anim-stagger">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </div>
+                            <div class="pres-arch-node pres-anim-stagger" data-tilt data-tilt-max="6" data-tilt-speed="300">
+                                <picture class="pres-arch-icon">
+                                    <source srcset="/pixel_hoya_logo.webp" type="image/webp">
+                                    <img src="/pixel_hoya_logo.png" alt="" width="32" height="32" style="image-rendering: pixelated;" />
+                                </picture>
+                                <strong>FastAPI + Supabase</strong>
+                                <span>Backend Serverless</span>
+                            </div>
+                            <div class="pres-arch-arrow pres-anim-stagger">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </div>
+                            <div class="pres-arch-node pres-anim-stagger" data-tilt data-tilt-max="6" data-tilt-speed="300">
+                                <picture class="pres-arch-icon">
+                                    <source srcset="/pixel_cat.webp" type="image/webp">
+                                    <img src="/pixel_cat.png" alt="" width="32" height="32" style="image-rendering: pixelated;" />
+                                </picture>
+                                <strong>Web App</strong>
+                                <span>Dashboard + Pet</span>
+                            </div>
+                        </div>
+                        <div class="pres-tech-pills">
+                            <span class="pres-pill pres-anim-stagger">ESP32-C3</span>
+                            <span class="pres-pill pres-anim-stagger">C++ / Arduino</span>
+                            <span class="pres-pill pres-anim-stagger">Python FastAPI</span>
+                            <span class="pres-pill pres-anim-stagger">Supabase PostgreSQL</span>
+                            <span class="pres-pill pres-anim-stagger">OpenAI Vision + DALL-E</span>
+                            <span class="pres-pill pres-anim-stagger">Vite + JS Vanilla</span>
+                            <span class="pres-pill pres-anim-stagger">Vercel CDN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 11: O Protótipo -->
                 <div class="pres-slide" data-slide="11">
-                    <div class="pres-slide-inner pres-slide--cover">
-                        <div class="pres-cover-icon">&#127793;</div>
-                        <h2 class="pres-title-xl">Gamificação não é só diversão</h2>
-                        <p class="pres-subtitle">É ferramenta pedagógica validada pela ciência</p>
+                    <div class="pres-slide-inner pres-slide--split">
+                        <div class="pres-col">
+                            <div class="pres-slide-label">Hardware</div>
+                            <h2 class="pres-title">O Protótipo</h2>
+                            <div class="pres-feature-list">
+                                <div class="pres-feature-item pres-anim-stagger">
+                                    <picture class="pres-feat-icon">
+                                        <source srcset="/farm_temp_icon.webp" type="image/webp">
+                                        <img src="/farm_temp_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                    </picture>
+                                    <div>
+                                        <strong>ESP32-C3 SuperMini</strong>
+                                        <p>Microcontrolador Wi-Fi com ADC 12-bit</p>
+                                    </div>
+                                </div>
+                                <div class="pres-feature-item pres-anim-stagger">
+                                    <picture class="pres-feat-icon">
+                                        <source srcset="/farm_soil_icon.webp" type="image/webp">
+                                        <img src="/farm_soil_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                    </picture>
+                                    <div>
+                                        <strong>Sensor Capacitivo v1.2</strong>
+                                        <p>Umidade do solo sem corrosão</p>
+                                    </div>
+                                </div>
+                                <div class="pres-feature-item pres-anim-stagger">
+                                    <picture class="pres-feat-icon">
+                                        <source srcset="/farm_humid_icon.webp" type="image/webp">
+                                        <img src="/farm_humid_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                    </picture>
+                                    <div>
+                                        <strong>Sensor AHT10</strong>
+                                        <p>Temperatura e umidade do ar</p>
+                                    </div>
+                                </div>
+                                <div class="pres-feature-item pres-anim-stagger">
+                                    <picture class="pres-feat-icon">
+                                        <source srcset="/farm_water_can_icon.webp" type="image/webp">
+                                        <img src="/farm_water_can_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                    </picture>
+                                    <div>
+                                        <strong>Mini Bomba Submersa 5V</strong>
+                                        <p>Irrigação automática 80-120L/h</p>
+                                    </div>
+                                </div>
+                                <div class="pres-feature-item pres-anim-stagger">
+                                    <picture class="pres-feat-icon">
+                                        <source srcset="/cozy_plant_icon.webp" type="image/webp">
+                                        <img src="/cozy_plant_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                    </picture>
+                                    <div>
+                                        <strong>Mangueira e Reservatório</strong>
+                                        <p>Sistema completo de irrigação</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pres-col pres-col--img">
+                            <img src="/screenshots/prototype_real.png" alt="Protótipo real do Hoya Pet" class="pres-img pres-proto-img" loading="lazy" data-tilt data-tilt-max="5" data-tilt-scale="1.02" data-tilt-glare data-tilt-max-glare="0.1" />
+                        </div>
                     </div>
                 </div>
 
-                <!-- Slide 13: CTA + QR Code -->
+                <!-- Slide 12: Dados e Monitoramento -->
                 <div class="pres-slide" data-slide="12">
+                    <div class="pres-slide-inner pres-slide--split">
+                        <div class="pres-col">
+                            <div class="pres-slide-label">Monitoramento</div>
+                            <h2 class="pres-title">Dados em Tempo Real</h2>
+                            <div class="pres-feature-list">
+                                <div class="pres-feature-item pres-anim-stagger">
+                                    <picture class="pres-feat-icon">
+                                        <source srcset="/farm_temp_icon.webp" type="image/webp">
+                                        <img src="/farm_temp_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                    </picture>
+                                    <div>
+                                        <strong>Temperatura</strong>
+                                        <p>Sensor AHT10 com precisão de 0.3C</p>
+                                    </div>
+                                </div>
+                                <div class="pres-feature-item pres-anim-stagger">
+                                    <picture class="pres-feat-icon">
+                                        <source srcset="/farm_soil_icon.webp" type="image/webp">
+                                        <img src="/farm_soil_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                    </picture>
+                                    <div>
+                                        <strong>Umidade do Solo</strong>
+                                        <p>Sensor capacitivo com calibração automática</p>
+                                    </div>
+                                </div>
+                                <div class="pres-feature-item pres-anim-stagger">
+                                    <picture class="pres-feat-icon">
+                                        <source srcset="/farm_water_can_icon.webp" type="image/webp">
+                                        <img src="/farm_water_can_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                    </picture>
+                                    <div>
+                                        <strong>Irrigação Automática</strong>
+                                        <p>Bomba 5V acionada por dados, não por timer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pres-col pres-col--img">
+                            <img src="/screenshots/pres_dashboard_scroll.webp" alt="Métricas e histórico" class="pres-img" loading="lazy" data-tilt data-tilt-max="5" data-tilt-scale="1.02" data-tilt-glare data-tilt-max-glare="0.1" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 13: Como Foi Construído -->
+                <div class="pres-slide" data-slide="13">
+                    <div class="pres-slide-inner">
+                        <div class="pres-slide-label">Desenvolvimento</div>
+                        <h2 class="pres-title">Como Foi Construído</h2>
+                        <div class="pres-timeline">
+                            <div class="pres-timeline-item pres-anim-stagger">
+                                <div class="pres-timeline-marker"></div>
+                                <div class="pres-timeline-content">
+                                    <strong>Hardware</strong>
+                                    <p>ESP32-C3 SuperMini com sensor capacitivo v1.2 e AHT10. Firmware C++ com calibração automática por ADC 12-bit. Bomba submersa 80-120L/h com proteção de cooldown e detecção de reservatório vazio</p>
+                                </div>
+                            </div>
+                            <div class="pres-timeline-item pres-anim-stagger">
+                                <div class="pres-timeline-marker"></div>
+                                <div class="pres-timeline-content">
+                                    <strong>Backend</strong>
+                                    <p>FastAPI serverless na Vercel com Supabase PostgreSQL. API REST com JWT, ingestão a cada 3s, histórico e comandos remotos. 3 integrações OpenAI: Vision (identificar planta), DALL-E (gerar pixel art) e Web Search (frases diárias)</p>
+                                </div>
+                            </div>
+                            <div class="pres-timeline-item pres-anim-stagger">
+                                <div class="pres-timeline-marker"></div>
+                                <div class="pres-timeline-content">
+                                    <strong>Frontend</strong>
+                                    <p>SPA em JavaScript vanilla com Vite. Dashboard responsivo com gráficos históricos, controle de irrigação remoto e pet interativo. Zero dependência de framework -funciona em qualquer navegador</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 14: Investimento e Viabilidade -->
+                <div class="pres-slide" data-slide="14">
+                    <div class="pres-slide-inner">
+                        <div class="pres-slide-label">Custos</div>
+                        <h2 class="pres-title">Investimento e Viabilidade</h2>
+                        <div class="pres-cost-list">
+                            <div class="pres-cost-item pres-anim-stagger">
+                                <picture class="pres-feat-icon">
+                                    <source srcset="/farm_temp_icon.webp" type="image/webp">
+                                    <img src="/farm_temp_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                </picture>
+                                <span>ESP32-C3 SuperMini</span>
+                                <strong>R$9</strong>
+                            </div>
+                            <div class="pres-cost-item pres-anim-stagger">
+                                <picture class="pres-feat-icon">
+                                    <source srcset="/farm_soil_icon.webp" type="image/webp">
+                                    <img src="/farm_soil_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                </picture>
+                                <span>Sensor capacitivo v1.2</span>
+                                <strong>R$2</strong>
+                            </div>
+                            <div class="pres-cost-item pres-anim-stagger">
+                                <picture class="pres-feat-icon">
+                                    <source srcset="/farm_humid_icon.webp" type="image/webp">
+                                    <img src="/farm_humid_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                </picture>
+                                <span>Sensor AHT10</span>
+                                <strong>R$4</strong>
+                            </div>
+                            <div class="pres-cost-item pres-anim-stagger">
+                                <picture class="pres-feat-icon">
+                                    <source srcset="/farm_water_can_icon.webp" type="image/webp">
+                                    <img src="/farm_water_can_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                </picture>
+                                <span>Mini bomba submersa 5V</span>
+                                <strong>R$6</strong>
+                            </div>
+                            <div class="pres-cost-item pres-anim-stagger">
+                                <picture class="pres-feat-icon">
+                                    <source srcset="/cozy_plant_icon.webp" type="image/webp">
+                                    <img src="/cozy_plant_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                </picture>
+                                <span>Tubo silicone + reservatório (garrafa)</span>
+                                <strong>R$2</strong>
+                            </div>
+                            <div class="pres-cost-item pres-anim-stagger">
+                                <picture class="pres-feat-icon">
+                                    <source srcset="/farm_temp_icon.webp" type="image/webp">
+                                    <img src="/farm_temp_icon.png" alt="" width="24" height="24" style="image-rendering: pixelated;" />
+                                </picture>
+                                <span>Jumpers + breadboard + USB</span>
+                                <strong>R$12</strong>
+                            </div>
+                        </div>
+                        <div class="pres-stats-row pres-stats-row--triple">
+                            <div class="pres-stat-card pres-anim-stagger" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.15" data-tilt-speed="400">
+                                <div class="pres-stat">~R$35</div>
+                                <p class="pres-stat-desc">por unidade</p>
+                            </div>
+                            <div class="pres-stat-card pres-anim-stagger" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.15" data-tilt-speed="400">
+                                <div class="pres-stat">~R$350</div>
+                                <p class="pres-stat-desc">10 unidades</p>
+                            </div>
+                            <div class="pres-stat-card pres-anim-stagger" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.15" data-tilt-speed="400">
+                                <div class="pres-stat">~R$15/mês</div>
+                                <p class="pres-stat-desc">API OpenAI</p>
+                            </div>
+                        </div>
+                        <p class="pres-body pres-body--muted">Supabase e Vercel gratuitos. Único custo recorrente: OpenAI (~US$2.50/mês)</p>
+                    </div>
+                </div>
+
+                <!-- Slide 15: Antes vs Depois -->
+                <div class="pres-slide" data-slide="15">
+                    <div class="pres-slide-inner pres-slide--split">
+                        <div class="pres-col">
+                            <div class="pres-slide-label">Impacto</div>
+                            <h2 class="pres-title">Sem Hoya Pet</h2>
+                            <ul class="pres-check-list pres-check-list--no">
+                                <li>Cuidado depende de poucos moradores</li>
+                                <li>Rega manual por adivinhação</li>
+                                <li>Jovens não participam</li>
+                                <li>Zero dados ou métricas</li>
+                            </ul>
+                        </div>
+                        <div class="pres-col">
+                            <h2 class="pres-title">Com Hoya Pet</h2>
+                            <ul class="pres-check-list pres-check-list--yes">
+                                <li>Pet avisa quando planta precisa de cuidado</li>
+                                <li>Irrigação automática por dados reais</li>
+                                <li>Gamificação gera engajamento diário</li>
+                                <li>Dashboard com histórico completo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 16: Proposta de Piloto -->
+                <div class="pres-slide" data-slide="16">
+                    <div class="pres-slide-inner">
+                        <div class="pres-slide-label">Piloto</div>
+                        <h2 class="pres-title">Proposta de Piloto</h2>
+                        <div class="pres-cards-grid">
+                            <div class="pres-info-card pres-anim-stagger" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.2" data-tilt-speed="400">
+                                <picture class="pres-card-icon">
+                                    <source srcset="/cozy_plant_icon.webp" type="image/webp">
+                                    <img src="/cozy_plant_icon.png" alt="" width="28" height="28" style="image-rendering: pixelated;" />
+                                </picture>
+                                <h3>Fase 1 -Piloto (30 dias)</h3>
+                                <p>1 unidade grátis na área comum. Moradores acompanham pelo app. Zero risco</p>
+                            </div>
+                            <div class="pres-info-card pres-anim-stagger" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.2" data-tilt-speed="400">
+                                <picture class="pres-card-icon">
+                                    <source srcset="/pixel_cat.webp" type="image/webp">
+                                    <img src="/pixel_cat.png" alt="" width="28" height="28" style="image-rendering: pixelated;" />
+                                </picture>
+                                <h3>Fase 2 -Expansão (3 meses)</h3>
+                                <p>10 unidades. Integração com WhatsApp e telas do elevador</p>
+                            </div>
+                            <div class="pres-info-card pres-anim-stagger" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.2" data-tilt-speed="400">
+                                <picture class="pres-card-icon">
+                                    <source srcset="/pixel_dog.webp" type="image/webp">
+                                    <img src="/pixel_dog.png" alt="" width="28" height="28" style="image-rendering: pixelated;" />
+                                </picture>
+                                <h3>Fase 3 -Escala</h3>
+                                <p>Modelo replicável para outros condomínios. Altos do Butantã como referência</p>
+                            </div>
+                        </div>
+                        <p class="pres-body">Investimento total Fase 2: <strong>~R$350 + R$15/mês</strong></p>
+                    </div>
+                </div>
+
+                <!-- Slide 17: Sustentabilidade Efetiva -->
+                <div class="pres-slide" data-slide="17">
                     <div class="pres-slide-inner pres-slide--cover">
-                        <h2 class="pres-title">Teste Agora</h2>
-                        <div class="pres-qr">
-                            <img src="/screenshots/qr_site.svg" alt="QR Code para o site" class="pres-qr-img" />
-                        </div>
-                        <p class="pres-body pres-body--lg">Escaneie o QR code ou acesse:</p>
-                        <p class="pres-url">projetoirrigacao.vercel.app</p>
-                        <div class="pres-credentials">
-                            <div class="pres-cred-row">
-                                <span class="pres-cred-label">Email</span>
-                                <span class="pres-cred-value">demo@hoyapet.com</span>
+                        <picture class="pres-cover-logo">
+                            <source srcset="/pixel_hoya_logo.webp" type="image/webp">
+                            <img src="/pixel_hoya_logo.png" alt="Hoya Pet" width="64" height="64" style="image-rendering: pixelated;" />
+                        </picture>
+                        <p class="pres-quote pres-anim-sub">"Você nunca muda as coisas lutando contra a realidade existente. Para mudar algo, construa um novo modelo que torne o antigo obsoleto"</p>
+                        <cite class="pres-cite pres-anim-fade">Buckminster Fuller</cite>
+                    </div>
+                </div>
+
+                <!-- Slide 18: CTA + QR Code -->
+                <div class="pres-slide" data-slide="18">
+                    <div class="pres-slide-inner pres-slide--cover">
+                        <h2 class="pres-title pres-anim-title">Teste o Sistema Agora</h2>
+                        <div class="pres-cta-split">
+                            <div class="pres-qr pres-anim-stagger">
+                                <img src="/screenshots/qr_site.svg" alt="QR Code para o site" class="pres-qr-img" data-tilt data-tilt-max="12" data-tilt-glare data-tilt-max-glare="0.3" />
                             </div>
-                            <div class="pres-cred-row">
-                                <span class="pres-cred-label">Senha</span>
-                                <span class="pres-cred-value">demo123</span>
+                            <div class="pres-cta-info pres-anim-stagger">
+                                <p class="pres-body">Escaneie o QR code ou acesse:</p>
+                                <p class="pres-url">projetoirrigacao.vercel.app</p>
+                                <div class="pres-credentials">
+                                    <div class="pres-cred-row">
+                                        <span class="pres-cred-label">Email</span>
+                                        <span class="pres-cred-value">demo@hoyapet.com</span>
+                                    </div>
+                                    <div class="pres-cred-row">
+                                        <span class="pres-cred-label">Senha</span>
+                                        <span class="pres-cred-value">demo123</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <p class="pres-body pres-body--muted pres-anim-fade">Desenvolvido por Pedro Pestana - FGV</p>
                     </div>
                 </div>
 
@@ -488,6 +922,12 @@
                     <button class="pres-dot" data-i="10"></button>
                     <button class="pres-dot" data-i="11"></button>
                     <button class="pres-dot" data-i="12"></button>
+                    <button class="pres-dot" data-i="13"></button>
+                    <button class="pres-dot" data-i="14"></button>
+                    <button class="pres-dot" data-i="15"></button>
+                    <button class="pres-dot" data-i="16"></button>
+                    <button class="pres-dot" data-i="17"></button>
+                    <button class="pres-dot" data-i="18"></button>
                 </div>
                 <button class="pres-arrow" id="presNext" aria-label="Próximo slide">&#8594;</button>
             </div>
@@ -947,7 +1387,7 @@
         </div>
         <div class="last-pump-row" id="lastPumpRow" style="display:none;">
             <span class="last-pump-label">💧 Última rega:</span>
-            <span id="lastPumpTime">—</span>
+            <span id="lastPumpTime">-</span>
         </div>
 
         <section class="dash-metrics">
@@ -1026,7 +1466,7 @@
                 <canvas id="chartHum" height="100"></canvas>
             </div>
             <div class="chart-card">
-                <span class="chart-label">Umidade do Solo (%) — suavizado</span>
+                <span class="chart-label">Umidade do Solo (%) -suavizado</span>
                 <canvas id="chartSoil" height="100"></canvas>
             </div>
         </section>

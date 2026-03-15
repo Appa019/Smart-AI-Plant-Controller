@@ -24,6 +24,12 @@ data/
 
 # IDE & tools
 .playwright-mcp/
+.claude/
+
+# Local-only files
+anotações/
+.vite/
+server_legacy.py
 
 # OS
 .DS_Store
@@ -37,3 +43,4 @@ image copy.png
 image copy 2.png
 Imagens_vaso/
 imagens/
+.vercel

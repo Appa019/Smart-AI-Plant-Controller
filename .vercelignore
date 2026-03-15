@@ -1,0 +1,8 @@
+server_legacy.py
+data/
+.venv/
+supabase/
+codigos_esp32/
+deploy/
+*.db
+.vite/

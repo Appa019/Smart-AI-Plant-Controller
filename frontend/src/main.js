@@ -1371,28 +1371,96 @@ function initPresentation() {
     const counter = $('presCounter');
     const total = slides.length;
     let cur = 0;
+    let transitioning = false;
 
     function goToSlide(i) {
         if (i < 0) i = total - 1;
         if (i >= total) i = 0;
-        slides.forEach((s, idx) => {
+        if (i === cur || transitioning) return;
+        transitioning = true;
+
+        const goingForward = i > cur || (cur === total - 1 && i === 0);
+
+        slides.forEach(s => {
             s.classList.remove('active', 'pres-exit-left');
-            if (idx === cur && idx !== i) s.classList.add('pres-exit-left');
+            s.style.transform = '';
         });
+
+        // Exit current slide
+        const currentSlide = slides[cur];
+        currentSlide.style.transform = goingForward
+            ? 'translateX(-40px) scale(0.98)'
+            : 'translateX(40px) scale(0.98)';
+        currentSlide.style.opacity = '0';
+
+        // Enter new slide
+        const nextSlide = slides[i];
+        nextSlide.style.transform = goingForward
+            ? 'translateX(40px) scale(0.98)'
+            : 'translateX(-40px) scale(0.98)';
+        nextSlide.style.opacity = '0';
+
+        requestAnimationFrame(() => {
+            nextSlide.classList.add('active');
+            nextSlide.style.transform = '';
+            nextSlide.style.opacity = '';
+        });
+
         dots.forEach(d => d.classList.remove('active'));
-        slides[i].classList.add('active');
         dots[i]?.classList.add('active');
         if (counter) counter.textContent = `${i + 1} / ${total}`;
+
+        // Update progress bar
+        const progress = overlay.querySelector('.pres-progress');
+        if (progress) progress.style.width = `${((i + 1) / total) * 100}%`;
+
+        // Destroy tilt on previous slide for performance
+        slides[cur]?.querySelectorAll('[data-tilt]').forEach(el => {
+            if (el.vanillaTilt) el.vanillaTilt.destroy();
+        });
+
+        // Init tilt on new slide
+        if (typeof VanillaTilt !== 'undefined') {
+            slides[i].querySelectorAll('[data-tilt]').forEach(el => {
+                if (!el.vanillaTilt) VanillaTilt.init(el);
+            });
+        }
+
         cur = i;
+        setTimeout(() => { transitioning = false; }, 500);
     }
 
     function openPres() {
         overlay.classList.add('active');
         document.body.classList.add('pres-open');
-        goToSlide(0);
+        // Reset all slides
+        slides.forEach(s => {
+            s.classList.remove('active', 'pres-exit-left');
+            s.style.transform = '';
+            s.style.opacity = '';
+        });
+        slides[0].classList.add('active');
+        dots.forEach(d => d.classList.remove('active'));
+        dots[0]?.classList.add('active');
+        if (counter) counter.textContent = `1 / ${total}`;
+        const progress = overlay.querySelector('.pres-progress');
+        if (progress) progress.style.width = `${(1 / total) * 100}%`;
+        cur = 0;
+        transitioning = false;
+
+        // Init tilt on first slide
+        if (typeof VanillaTilt !== 'undefined') {
+            slides[0].querySelectorAll('[data-tilt]').forEach(el => {
+                if (!el.vanillaTilt) VanillaTilt.init(el);
+            });
+        }
     }
 
     function closePres() {
+        // Destroy all tilt instances
+        track.querySelectorAll('[data-tilt]').forEach(el => {
+            if (el.vanillaTilt) el.vanillaTilt.destroy();
+        });
         overlay.classList.remove('active');
         document.body.classList.remove('pres-open');
     }
@@ -1416,7 +1484,7 @@ function initPresentation() {
         if (e.key === 'ArrowRight') goToSlide(cur + 1);
     });
 
-    // Touch swipe support
+    // Touch swipe
     let touchStartX = 0;
     overlay.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;

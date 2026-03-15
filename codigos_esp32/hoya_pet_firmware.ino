@@ -11,7 +11,7 @@
  *
  *  Funcionalidades:
  *    - Leitura de sensores a cada 5s
- *    - Envio para Cloud (VPS Oracle) via HTTP POST
+ *    - Envio para Cloud (Vercel) via HTTP POST
  *    - Irrigacao inteligente com protecoes:
  *      > Espera minimo 1 hora apos regar para re-avaliar solo
  *      > Pulsos curtos (~2-3s) para evitar excesso
@@ -48,8 +48,8 @@ IPAddress primaryDNS(8, 8, 8, 8);
 IPAddress secondaryDNS(1, 1, 1, 1);
 
 // ==================== CLOUD SERVER ====================
-// >>> ALTERE PARA O IP DA SUA VPS <<<
-const char* CLOUD_SERVER  = "http://YOUR_VPS_IP:8000/api/ingest";
+// >>> ALTERE PARA A URL DO SEU DEPLOY VERCEL <<<
+const char* CLOUD_SERVER  = "https://YOUR_VERCEL_URL/api/ingest";
 const char* CLOUD_API_KEY = "YOUR_INGEST_API_KEY";
 
 // Credenciais HTTP Basic Auth para o servidor web local (endpoint /pump)

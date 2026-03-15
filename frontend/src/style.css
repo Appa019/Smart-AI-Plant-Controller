@@ -2967,17 +2967,25 @@ body::after {
     display: none;
     flex-direction: column;
     overflow: hidden;
+    opacity: 0;
 }
 
 .pres-overlay.active {
     display: flex;
+    animation: pres-overlay-in 0.35s var(--ease-spring) forwards;
 }
 
+@keyframes pres-overlay-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Header */
 .pres-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem 1.5rem;
+    padding: 0.6rem 1.5rem;
     border-bottom: 3px solid var(--wood-dark);
     background: var(--parchment);
     flex-shrink: 0;
@@ -2985,29 +2993,40 @@ body::after {
 
 .pres-counter {
     font-family: var(--font-pixel);
-    font-size: 0.7rem;
-    color: var(--text-secondary);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+}
+
+.pres-progress {
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    height: 3px;
+    background: var(--accent-gold);
+    transition: width 0.5s var(--ease-spring);
 }
 
 .pres-close {
     background: none;
     border: 2px solid var(--wood-dark);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     line-height: 1;
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2rem;
+    height: 2rem;
     cursor: pointer;
     color: var(--text-dark);
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 2px 2px 0 var(--wood-dark);
-    transition: background 0.2s;
+    transition: background 0.15s, transform 0.15s;
 }
 
 .pres-close:hover {
     background: var(--danger-red);
     color: #fff;
+    transform: translateY(-1px);
 }
 
 /* Track & slides */
@@ -3025,26 +3044,71 @@ body::after {
     justify-content: center;
     padding: 2rem 1.5rem;
     opacity: 0;
-    transform: translateX(30px);
-    transition: opacity 0.4s var(--ease-settle), transform 0.4s var(--ease-settle);
+    transform: translateX(40px) scale(0.98);
+    transition: opacity 0.5s var(--ease-spring), transform 0.5s var(--ease-spring);
     pointer-events: none;
     overflow-y: auto;
+    will-change: transform, opacity;
 }
 
 .pres-slide.active {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) scale(1);
     pointer-events: auto;
 }
 
 .pres-slide.pres-exit-left {
     opacity: 0;
-    transform: translateX(-30px);
+    transform: translateX(-40px) scale(0.98);
+}
+
+/* Stagger animations — triggered when slide becomes active */
+.pres-slide.active .pres-anim-stagger {
+    animation: pres-stagger-in 0.5s var(--ease-spring) both;
+}
+.pres-slide.active .pres-anim-stagger:nth-child(1) { animation-delay: 0.1s; }
+.pres-slide.active .pres-anim-stagger:nth-child(2) { animation-delay: 0.2s; }
+.pres-slide.active .pres-anim-stagger:nth-child(3) { animation-delay: 0.3s; }
+.pres-slide.active .pres-anim-stagger:nth-child(4) { animation-delay: 0.4s; }
+.pres-slide.active .pres-anim-stagger:nth-child(5) { animation-delay: 0.5s; }
+.pres-slide.active .pres-anim-stagger:nth-child(6) { animation-delay: 0.55s; }
+.pres-slide.active .pres-anim-stagger:nth-child(7) { animation-delay: 0.6s; }
+
+@keyframes pres-stagger-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.pres-slide.active .pres-anim-title {
+    animation: pres-title-in 0.6s var(--ease-spring) 0.05s both;
+}
+
+@keyframes pres-title-in {
+    from { opacity: 0; transform: translateY(-12px); letter-spacing: 0.15em; }
+    to { opacity: 1; transform: translateY(0); letter-spacing: inherit; }
+}
+
+.pres-slide.active .pres-anim-sub {
+    animation: pres-stagger-in 0.5s var(--ease-spring) 0.2s both;
+}
+
+.pres-slide.active .pres-anim-fade {
+    animation: pres-stagger-in 0.5s var(--ease-spring) 0.35s both;
+}
+
+/* Animated bars */
+.pres-slide.active .pres-anim-bar {
+    animation: pres-bar-grow 0.8s var(--ease-spring) 0.3s both;
+}
+
+@keyframes pres-bar-grow {
+    from { width: 0 !important; }
+    to { width: var(--bar-w) !important; }
 }
 
 /* Slide inner */
 .pres-slide-inner {
-    max-width: 720px;
+    max-width: 780px;
     width: 100%;
     text-align: center;
 }
@@ -3054,12 +3118,41 @@ body::after {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.25rem;
 }
 
-.pres-cover-icon {
-    font-size: 3.5rem;
-    line-height: 1;
+.pres-cover-logo {
+    display: block;
+    width: 64px;
+    height: 64px;
+}
+
+.pres-cover-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-readable);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}
+
+.pres-meta-sep {
+    width: 4px;
+    height: 4px;
+    background: var(--wood-medium);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* Slide label */
+.pres-slide-label {
+    font-family: var(--font-pixel);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold-dark);
+    margin-bottom: 0.5rem;
 }
 
 /* Split layout */
@@ -3068,12 +3161,12 @@ body::after {
     grid-template-columns: 1fr;
     gap: 2rem;
     text-align: left;
-    max-width: 900px;
+    max-width: 940px;
 }
 
 @media (min-width: 640px) {
     .pres-slide--split {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1.1fr 0.9fr;
         align-items: center;
     }
 }
@@ -3087,16 +3180,26 @@ body::after {
 .pres-img {
     max-width: 100%;
     height: auto;
-    max-height: 340px;
+    max-height: 360px;
     border: 3px solid var(--wood-dark);
     box-shadow: 6px 6px 0 var(--wood-dark);
     image-rendering: auto;
+    transition: transform 0.3s var(--ease-settle);
+}
+
+.pres-slide.active .pres-img {
+    animation: pres-img-in 0.6s var(--ease-spring) 0.15s both;
+}
+
+@keyframes pres-img-in {
+    from { opacity: 0; transform: scale(0.92) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 /* Typography */
 .pres-title-xl {
     font-family: var(--font-pixel);
-    font-size: clamp(1.1rem, 2.5vw, 1.75rem);
+    font-size: clamp(1.2rem, 3vw, 2rem);
     color: var(--text-dark);
     line-height: 1.5;
     text-shadow: 1px 1px 0 var(--wood-highlight);
@@ -3104,10 +3207,10 @@ body::after {
 
 .pres-title {
     font-family: var(--font-pixel);
-    font-size: clamp(0.85rem, 2vw, 1.15rem);
+    font-size: clamp(0.95rem, 2vw, 1.3rem);
     color: var(--text-dark);
-    margin-bottom: 1rem;
-    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
     text-shadow: 1px 1px 0 var(--wood-highlight);
 }
 
@@ -3116,36 +3219,66 @@ body::after {
     font-size: clamp(1rem, 2vw, 1.35rem);
     color: var(--text-secondary);
     font-weight: 600;
+    max-width: 520px;
+    line-height: 1.5;
 }
 
 .pres-body {
     font-family: var(--font-readable);
-    font-size: 1.0625rem;
+    font-size: 1rem;
     color: var(--text-body);
     line-height: 1.7;
     margin-bottom: 0.75rem;
 }
 
 .pres-body--lg {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
+}
+
+.pres-body--muted {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* Stats */
+.pres-stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pres-stat-card {
+    padding: 1.25rem 1rem;
+    background: var(--parchment-dark);
+    border: 3px solid var(--wood-dark);
+    box-shadow: 4px 4px 0 var(--wood-dark);
+    text-align: center;
 }
 
 .pres-stat {
     font-family: var(--font-pixel);
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(1.75rem, 4.5vw, 3rem);
     color: var(--accent-gold-dark);
     text-shadow: 2px 2px 0 var(--wood-highlight);
-    margin: 0.75rem 0;
+    line-height: 1.2;
 }
 
-.pres-stat--sm {
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
+.pres-stat-desc {
+    font-family: var(--font-readable);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+    line-height: 1.4;
 }
 
 .pres-cite {
     display: block;
     font-family: var(--font-body);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--text-muted);
     font-style: normal;
     margin-top: 1rem;
@@ -3153,39 +3286,229 @@ body::after {
     border-top: 2px dashed var(--border);
 }
 
-.pres-icon {
-    display: block;
-    font-size: 2.5rem;
-    margin-bottom: 0.75rem;
-}
-
-/* List */
-.pres-list {
-    list-style: none;
+/* Info cards grid */
+.pres-cards-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.75rem;
-    margin: 1.25rem 0;
+    gap: 1rem;
+    margin: 1.5rem 0;
     text-align: left;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-@media (min-width: 480px) {
-    .pres-list {
-        grid-template-columns: 1fr 1fr;
+@media (min-width: 640px) {
+    .pres-cards-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
-.pres-list li {
+.pres-info-card {
+    padding: 1.25rem;
+    background: var(--parchment-dark);
+    border: 3px solid var(--wood-dark);
+    box-shadow: 4px 4px 0 var(--wood-dark);
+    transition: transform 0.2s var(--ease-settle), box-shadow 0.2s var(--ease-settle);
+}
+
+.pres-info-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 6px 0 var(--wood-dark);
+}
+
+.pres-card-icon {
+    width: 28px;
+    height: 28px;
+    color: var(--accent-gold-dark);
+    margin-bottom: 0.75rem;
+    stroke-width: 2;
+}
+
+.pres-info-card h3 {
+    font-family: var(--font-pixel);
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+}
+
+.pres-info-card p {
     font-family: var(--font-readable);
-    font-size: 1rem;
-    color: var(--text-body);
-    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Feature list (vertical) */
+.pres-feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.pres-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    text-align: left;
+}
+
+.pres-feat-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--accent-gold-dark);
+    flex-shrink: 0;
+    margin-top: 2px;
+    stroke-width: 2;
+}
+
+.pres-feature-item strong {
+    display: block;
+    font-family: var(--font-pixel);
+    font-size: 0.8rem;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    margin-bottom: 0.15rem;
+}
+
+.pres-feature-item p {
+    font-family: var(--font-readable);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Architecture diagram */
+.pres-arch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+}
+
+.pres-arch-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 1rem;
+    background: var(--parchment-dark);
+    border: 3px solid var(--wood-dark);
+    box-shadow: 4px 4px 0 var(--wood-dark);
+    min-width: 120px;
+}
+
+.pres-arch-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--accent-gold-dark);
+    stroke-width: 1.5;
+}
+
+.pres-arch-node strong {
+    font-family: var(--font-pixel);
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    text-transform: uppercase;
+}
+
+.pres-arch-node span {
+    font-family: var(--font-readable);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.pres-arch-arrow {
+    display: flex;
+    align-items: center;
+}
+
+.pres-arch-arrow svg {
+    width: 24px;
+    height: 24px;
+    color: var(--wood-medium);
+    stroke-width: 2;
+}
+
+@media (max-width: 639px) {
+    .pres-arch {
+        flex-direction: column;
+    }
+    .pres-arch-arrow svg {
+        transform: rotate(90deg);
+    }
+}
+
+/* Tech pills */
+.pres-tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.pres-pill {
+    font-family: var(--font-readable);
+    font-size: 0.875rem;
+    color: var(--text-dark);
+    padding: 0.35rem 0.75rem;
     background: var(--parchment-dark);
     border: 2px solid var(--wood-dark);
-    box-shadow: 3px 3px 0 var(--wood-dark);
+    box-shadow: 2px 2px 0 var(--wood-dark);
+}
+
+/* Timeline */
+.pres-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 1.5rem auto;
+    max-width: 560px;
+    text-align: left;
+}
+
+.pres-timeline-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0;
+    position: relative;
+}
+
+.pres-timeline-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 2.5rem;
+    bottom: 0;
+    width: 2px;
+    background: var(--wood-light);
+}
+
+.pres-timeline-marker {
+    width: 16px;
+    height: 16px;
+    border: 3px solid var(--accent-gold-dark);
+    background: var(--parchment);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.pres-timeline-content strong {
+    display: block;
+    font-family: var(--font-pixel);
+    font-size: 0.8rem;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+.pres-timeline-content p {
+    font-family: var(--font-readable);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
 }
 
 /* CSS bar charts */
@@ -3194,21 +3517,21 @@ body::after {
     flex-direction: column;
     gap: 1rem;
     margin: 1.5rem 0;
-    max-width: 480px;
+    max-width: 500px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .pres-bar-group {
     display: grid;
-    grid-template-columns: 120px 1fr 50px;
+    grid-template-columns: 140px 1fr 50px;
     align-items: center;
     gap: 0.75rem;
 }
 
 @media (max-width: 479px) {
     .pres-bar-group {
-        grid-template-columns: 90px 1fr 45px;
+        grid-template-columns: 100px 1fr 45px;
         gap: 0.5rem;
     }
 }
@@ -3225,12 +3548,14 @@ body::after {
     background: var(--parchment-dark);
     border: 2px solid var(--wood-dark);
     position: relative;
+    overflow: hidden;
 }
 
 .pres-bar {
     height: 100%;
     background: var(--wood-light);
-    transition: width 0.6s var(--ease-settle);
+    width: var(--bar-w, 0);
+    transition: width 0.8s var(--ease-spring);
 }
 
 .pres-bar--accent {
@@ -3239,7 +3564,7 @@ body::after {
 
 .pres-bar-value {
     font-family: var(--font-pixel);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: var(--text-dark);
 }
 
@@ -3249,7 +3574,7 @@ body::after {
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    padding: 0.75rem 1.5rem;
+    padding: 0.6rem 1.5rem;
     border-top: 3px solid var(--wood-dark);
     background: var(--parchment);
     flex-shrink: 0;
@@ -3258,43 +3583,51 @@ body::after {
 .pres-arrow {
     background: none;
     border: 2px solid var(--wood-dark);
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1.25rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 1.1rem;
     cursor: pointer;
     color: var(--text-dark);
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 2px 2px 0 var(--wood-dark);
-    transition: background 0.2s;
+    transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
     flex-shrink: 0;
 }
 
 .pres-arrow:hover {
     background: var(--spring-green);
     color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 2px 3px 0 var(--wood-dark);
+}
+
+.pres-arrow:active {
+    transform: translateY(1px);
+    box-shadow: 1px 1px 0 var(--wood-dark);
 }
 
 .pres-dots {
     display: flex;
-    gap: 0.375rem;
+    gap: 0.35rem;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .pres-dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border: 2px solid var(--wood-dark);
     background: var(--parchment-dark);
     cursor: pointer;
     padding: 0;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.2s;
 }
 
 .pres-dot.active {
     background: var(--accent-gold);
+    transform: scale(1.3);
 }
 
 .pres-dot:hover {
@@ -3327,16 +3660,34 @@ body::after {
     flex-shrink: 0;
 }
 
-/* QR Code slide */
+/* CTA split layout */
+.pres-cta-split {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+}
+
+.pres-cta-info {
+    text-align: left;
+}
+
+/* QR Code */
 .pres-qr {
     display: flex;
     justify-content: center;
-    margin: 0.5rem 0;
 }
 
 .pres-qr-img {
-    width: 180px;
-    height: 180px;
+    width: 220px;
+    height: 220px;
+}
+
+.pres-qr-img--big {
+    width: 280px;
+    height: 280px;
     border: 3px solid var(--wood-dark);
     box-shadow: 4px 4px 0 var(--wood-dark);
     background: var(--parchment);
@@ -3345,24 +3696,22 @@ body::after {
 
 .pres-url {
     font-family: var(--font-pixel);
-    font-size: clamp(0.65rem, 1.5vw, 0.85rem);
+    font-size: clamp(0.8rem, 2vw, 1.1rem);
     color: var(--lake-deep);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .pres-credentials {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    max-width: 340px;
-    margin: 0 auto;
+    gap: 0.4rem;
 }
 
 .pres-cred-row {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.6rem 1rem;
+    padding: 0.5rem 0.85rem;
     background: var(--parchment-dark);
     border: 2px solid var(--wood-dark);
     box-shadow: 3px 3px 0 var(--wood-dark);
@@ -3370,17 +3719,123 @@ body::after {
 
 .pres-cred-label {
     font-family: var(--font-pixel);
-    font-size: 0.6rem;
-    color: var(--text-secondary);
+    font-size: 0.85rem;
+    color: var(--text-muted);
     text-transform: uppercase;
-    min-width: 50px;
+    min-width: 45px;
 }
 
 .pres-cred-value {
     font-family: var(--font-body);
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: var(--text-dark);
     letter-spacing: 0.02em;
+}
+
+/* 3D tilt containers */
+.pres-cards-grid,
+.pres-stats-row,
+.pres-arch {
+    perspective: 800px;
+    transform-style: preserve-3d;
+}
+
+.pres-info-card,
+.pres-stat-card,
+.pres-arch-node {
+    transform-style: preserve-3d;
+}
+
+/* Glare color override */
+.js-tilt-glare-inner {
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(250, 244, 225, 0.6) 100%
+    ) !important;
+}
+
+/* Prototype image */
+.pres-proto-img {
+    max-height: 420px;
+    object-fit: contain;
+    box-shadow: 6px 6px 0 var(--wood-dark), 0 0 0 3px var(--wood-dark);
+}
+
+/* Picture tags as pixel art icons */
+picture.pres-card-icon,
+picture.pres-feat-icon,
+picture.pres-arch-icon {
+    display: block;
+    image-rendering: pixelated;
+}
+picture.pres-card-icon { width: 28px; height: 28px; margin-bottom: 0.75rem; }
+picture.pres-feat-icon { width: 24px; height: 24px; flex-shrink: 0; margin-top: 2px; }
+picture.pres-arch-icon { width: 32px; height: 32px; }
+picture.pres-card-icon img,
+picture.pres-feat-icon img,
+picture.pres-arch-icon img {
+    width: 100%; height: 100%; image-rendering: pixelated;
+}
+
+/* Check/X list for split slides */
+.pres-check-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.pres-check-list li {
+    font-family: var(--font-readable);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    display: flex; align-items: center; gap: 0.5rem;
+}
+.pres-check-list li::before { font-family: var(--font-pixel); font-size: 0.7rem; }
+.pres-check-list--yes li::before { content: "✓"; color: var(--health-green); }
+.pres-check-list--no li::before { content: "✗"; color: var(--danger-red); }
+
+/* Stats row triple columns for cost slide */
+.pres-stats-row--triple { grid-template-columns: repeat(3, 1fr); }
+.pres-stats-row--triple .pres-stat-card { padding: 0.75rem 0.6rem; }
+.pres-stats-row--triple .pres-stat { font-size: clamp(0.9rem, 2.5vw, 1.3rem); }
+.pres-stats-row--triple .pres-stat-desc { font-size: 0.8rem; }
+@media (max-width: 639px) { .pres-stats-row--triple { grid-template-columns: 1fr; } }
+
+/* Cost feature list */
+.pres-cost-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin: 1rem 0;
+    text-align: left;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.pres-cost-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.pres-cost-item span {
+    font-family: var(--font-readable);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    flex: 1;
+}
+.pres-cost-item strong {
+    font-family: var(--font-pixel);
+    font-size: 0.7rem;
+    color: var(--accent-gold-dark);
+    white-space: nowrap;
+}
+
+/* Quote style for phrase slide */
+.pres-quote {
+    font-family: var(--font-heading);
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 600;
+    font-style: italic;
+    color: var(--text-dark);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 /* Body scroll lock */

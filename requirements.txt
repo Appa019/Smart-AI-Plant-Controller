@@ -6,5 +6,5 @@ openai
 python-jose[cryptography]
 python-multipart
 python-dotenv
-apscheduler
 Pillow
+supabase
