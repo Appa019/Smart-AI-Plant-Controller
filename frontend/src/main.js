@@ -7,7 +7,6 @@ const $ = (id) => document.getElementById(id);
 
 // ==================== STATE ====================
 let token = localStorage.getItem('hoya_token') || '';
-let setupComplete = false;
 let chartHours = 6;
 const chartAbortControllers = {};
 
@@ -498,7 +497,6 @@ function initSetup() {
             }
 
             hideLoading();
-            setupComplete = true;
             showPage('dash');
             initDashboard();
         } catch (err) {
@@ -620,7 +618,6 @@ async function renderPetCarousel() {
             addBtn.addEventListener('click', async () => {
                 try {
                     await api('POST', '/api/plants');
-                    setupComplete = false;
                     dashInitialized = false;
                     resetSetupForm();
                     showPage('setup');
@@ -681,7 +678,6 @@ async function initDashboard() {
         try {
             await api('POST', '/api/plants');
         } catch (e) { /* slot may already exist */ }
-        setupComplete = false;
         dashInitialized = false;
         resetSetupForm();
         showPage('setup');

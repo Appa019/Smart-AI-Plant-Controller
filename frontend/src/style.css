@@ -295,10 +295,6 @@ body::after {
 }
 
 .input-group input[type="password"],
-.input-group input.has-toggle {
-    padding-right: 3rem;
-}
-
 .input-group input:focus {
     background: #c8e6a0;
     border-color: var(--accent-green);
@@ -1241,15 +1237,6 @@ body::after {
     border-bottom: 8px solid #ffffff;
 }
 
-.pet-event {
-    font-family: var(--font-body);
-    font-size: 1.2rem;
-    color: var(--text-body);
-    max-width: 200px;
-    text-align: left;
-    line-height: 1.3;
-}
-
 /* Plant info bar */
 .plant-info-bar {
     display: flex;
@@ -1956,47 +1943,7 @@ body::after {
     }
 }
 
-/* ==================== VINE DECORATION ==================== */
-.deco-vine {
-    position: fixed;
-    z-index: 5;
-    pointer-events: none;
-    image-rendering: pixelated;
-    opacity: 0.75;
-    filter: saturate(1.2);
-}
-
-.vine-tl {
-    top: -20px;
-    left: -20px;
-    width: 180px;
-}
-
-.vine-tr {
-    top: -20px;
-    right: -20px;
-    width: 180px;
-    transform: scaleX(-1);
-}
-
-.vine-bl {
-    bottom: -20px;
-    left: -20px;
-    width: 180px;
-    transform: scaleY(-1);
-}
-
-.vine-br {
-    bottom: -20px;
-    right: -20px;
-    width: 180px;
-    transform: scale(-1, -1);
-}
-
 @media (max-width: 600px) {
-    .deco-vine {
-        width: 120px;
-    }
 
     .pet-option {
         padding: 0.75rem 0.5rem;
@@ -2142,19 +2089,6 @@ body::after {
     margin-top: 0.15rem;
     display: block;
     opacity: 0.85;
-}
-
-/* ==================== UTILITY CLASSES ==================== */
-.text-vt323 {
-    font-family: var(--font-body);
-    font-size: 1.25rem;
-    line-height: 1.35;
-}
-
-.woodgrain-bg {
-    background:
-        var(--wood-grain),
-        linear-gradient(180deg, var(--parchment) 0%, var(--parchment-dark) 100%);
 }
 
 /* ================================================================
@@ -2382,28 +2316,6 @@ body::after {
     font-size: 0.8rem;
     color: var(--lp-text);
     letter-spacing: 0.02em;
-}
-
-.lp-nav-btn {
-    font-family: var(--font-pixel);
-    font-size: 0.75rem;
-    font-weight: 400;
-    color: var(--lp-text);
-    background: transparent;
-    border: 2px solid var(--wood-dark);
-    border-radius: 0;
-    padding: 0.5rem 1.25rem;
-    cursor: pointer;
-    transition: all 0.2s var(--lp-ease);
-    text-transform: uppercase;
-    box-shadow: 2px 2px 0 var(--wood-dark);
-}
-
-.lp-nav-btn:hover {
-    background: var(--spring-green);
-    color: #fff;
-    transform: translateY(-1px);
-    box-shadow: 2px 3px 0 var(--wood-dark);
 }
 
 /* ==================== HERO ==================== */
@@ -3229,10 +3141,6 @@ body::after {
     color: var(--text-body);
     line-height: 1.7;
     margin-bottom: 0.75rem;
-}
-
-.pres-body--lg {
-    font-size: 1.15rem;
 }
 
 .pres-body--muted {

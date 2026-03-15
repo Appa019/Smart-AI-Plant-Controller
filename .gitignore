@@ -31,6 +31,10 @@ anotações/
 .vite/
 server_legacy.py
 
+# Supabase CLI temp
+supabase/.temp/
+supabase/supabase/
+
 # OS
 .DS_Store
 Thumbs.db

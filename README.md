@@ -126,9 +126,8 @@ Configure as variaveis de ambiente no dashboard Vercel (veja `.env.example`).
 |   +-- vite.config.js
 |-- codigos_esp32/
 |   +-- hoya_pet_firmware.ino     # Firmware de producao do ESP32
-|-- supabase/
-|   +-- schema.sql                # Schema PostgreSQL para Supabase
-+-- deploy/                       # Scripts de deploy legado (referencia)
++-- supabase/
+    +-- schema.sql                # Schema PostgreSQL para Supabase
 ```
 
 ## Licenca

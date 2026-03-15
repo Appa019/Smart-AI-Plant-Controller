@@ -9,12 +9,11 @@ Hoya Pet App — FastAPI backend (Vercel + Supabase edition).
 - Vercel Cron endpoints for scheduled pet generation
 """
 import os, json, base64, threading, time, logging, hmac, hashlib, random, io
-import requests as http_requests
 from PIL import Image
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
-from fastapi import FastAPI, Query, Header, HTTPException, Depends, UploadFile, File, Form, Request
+from fastapi import FastAPI, Query, Header, HTTPException, Depends, UploadFile, File, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse, Response
